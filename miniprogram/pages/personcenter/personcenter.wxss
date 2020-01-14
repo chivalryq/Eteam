@@ -1,0 +1,42 @@
+/* pages/personcenter/personcenter.wxss */
+.top{
+  height:100%;
+  width:100%;
+
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(106, 168, 219, 0.637);
+}
+.container{
+  margin-top: 20rpx;
+  height:100%;
+  width:100%;
+}
+.item{
+  width:650rpx;
+  height:80rpx;
+  background-color:rgb(245, 245, 245);
+  border:1px solid lightgray;
+}
+.itemtag{
+  margin-top: 20rpx;
+  margin-bottom: -10rpx;
+  margin-left: 15rpx;
+  margin-right: 25rpx;
+  width:40rpx;
+  height:40rpx;
+}
+.avatar{
+  width:128rpx;
+  height:128rpx;
+  margin-top:70rpx;
+  margin-left: 300rpx;
+  border-radius:50%;
+}
+.nickname{
+  color:rgb(0, 0, 0);
+  margin-left: 295rpx;
+  margin-top: 10rpx;
+  margin-bottom: 70rpx;
+}

@@ -1,0 +1,31 @@
+<!--pages/personcenter/personcenter.wxml-->
+<cu-custom bgColor="bg-gradual-blue">
+  <view slot="content">个人中心</view>
+</cu-custom>
+
+<view class="top">
+  <image class="avatar" src='{{userInfo.avatarUrl}}'></image>
+  <view class="nickname" style="font-size:15px">{{userInfo.nickName}}</view>
+</view>
+
+<view class="container">
+
+  <view class="item" bindtap='gopersonDetail'>
+    <image class="itemtag" src="images/post.png"></image>
+    <text>个人管理</text>
+
+  </view>
+  <view class="item">
+    <image class="itemtag" src="images/tech.png"></image>
+    <text>队伍管理</text>
+  </view>
+  <view class="item">
+    <image class="itemtag" src="images/major.png"></image>
+    <text>设置</text>
+  </view>
+  <view class="item">
+    <image class="itemtag" src="images/busy.png"></image>
+    <text>关于</text>
+  </view>
+
+</view>

@@ -1,0 +1,93 @@
+<!--pages/findGroup/findGroup.wxml-->
+
+<cu-custom bgColor="bg-gradual-red" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">找队伍</view>
+</cu-custom>
+
+
+<view class="cu-item shadow-lg">
+	<view class="cu-card dynamic {{isCard?'no-card':''}} ">
+  <view class="cu-item shadow margin-tb-xs">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item">
+        <view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);"></view>
+        <view class="content flex-sub">
+          <view>凯尔</view>
+        </view>
+      </view>
+    </view>
+    <view class="text-content">
+      折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！
+    </view>
+    <view class="grid flex-sub padding-lr {{isCard?'col-3 grid-square':'col-1'}}">
+      <view class="bg-img {{isCard?'':'only-img'}}" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);" wx:for="{{isCard?9:1}}" wx:key="{{index}}">
+      </view>
+    </view>
+  </view>
+  </view>
+</view>
+
+<block wx:for="{{person}}" wx:key="unique">
+<view class="cu-item shadow-lg" bindtap='onItemClick' data-personid="{{item._id}}">
+	<view class="cu-card dynamic {{isCard?'no-card':''}} ">
+  <view class="cu-item shadow margin-tb-xs">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item">
+        <view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);"></view>
+        <view class="content flex-sub">
+          <view>{{item.detail.name}}</view>
+        </view>
+      </view>
+    </view>
+
+   <view class="cu-item">
+    <view class="action margin-left">
+
+		<view class='cu-item'>
+      <text class="icon-dianhua text-green"></text>{{item.detail.tel}}
+		</view>
+		<view class='cu-item'>
+      <text class="icon-friendfavor text-yellow"></text>{{item.detail.post}}
+		</view>
+<block wx:if="{{item.detail.post=='技术'||item.detail.post=='全能选手'}}">
+<view class='cu-item'>
+      <text class="icon-lightfill text-yellow margin-left"></text>{{item.detail.tech}}
+		</view>
+</block>
+<block wx:if="{{item.detail.post=='美工'||item.detail.post=='全能选手'}}">
+<view class='cu-item'>
+      <text class="icon-lightfill text-yellow margin-left"></text>{{item.detail.art}}
+		</view>
+</block>
+    </view>
+   </view>
+  </view>
+  </view>
+	
+</view>
+</block>
+
+<view class="cu-item shadow-lg">
+	<view class="cu-card dynamic {{isCard?'no-card':''}} ">
+  <view class="cu-item shadow margin-tb-xs">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item">
+        <view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);"></view>
+        <view class="content flex-sub">
+          <view>凯尔</view>
+        </view>
+      </view>
+    </view>
+    <view class="text-content">
+      折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！
+    </view>
+    <view class="grid flex-sub padding-lr {{isCard?'col-3 grid-square':'col-1'}}">
+      <view class="bg-img {{isCard?'':'only-img'}}" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);" wx:for="{{isCard?9:1}}" wx:key="{{index}}">
+      </view>
+    </view>
+  </view>
+  </view>
+	
+</view>
+

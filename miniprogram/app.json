@@ -1,0 +1,38 @@
+{
+    
+	"pages": [
+		"pages/index/index",
+		"pages/addPerson/addPerson",
+		"pages/addGroup/addGroup",
+		"pages/findPerson/findPerson",
+		"pages/personDetail/personDetail",
+    "pages/findGroup/findGroup",
+    "pages/personcenter/personcenter"
+	],
+	"window": {
+		"navigationStyle": "custom"
+	},
+  "tabBar": {
+    "color": "#a9b7b7",
+    "selectedColor": "#11cd6e",
+    "borderStyle": "white",
+    "list": [
+      {
+        "iconPath":"images/index.png",
+        "selectedIconPath": "images/indexselected.png",
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "iconPath": "images/person.png",
+        "selectedIconPath": "images/personselected.png",
+        "pagePath": "pages/personcenter/personcenter",
+        "text": "个人中心"
+      }
+    ]
+  },
+	"usingComponents": {
+		"cu-custom": "/colorui/components/cu-custom"
+	},
+	"sitemapLocation": "sitemap.json"
+}

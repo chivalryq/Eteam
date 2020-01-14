@@ -1,0 +1,78 @@
+{
+	"miniprogramRoot": "miniprogram/",
+	"cloudfunctionRoot": "cloudfunctions/",
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"appid": "wx8f45a1eb93a6ac54",
+	"projectname": "Eteam1",
+	"libVersion": "2.2.5",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 5,
+			"list": [
+				{
+					"id": -1,
+					"name": "db guide",
+					"pathName": "pages/databaseGuide/databaseGuide",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "毛遂自荐",
+					"pathName": "pages/addPerson/addPerson",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "发布队伍",
+					"pathName": "pages/addGroup/addGroup",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "储存",
+					"pathName": "pages/storageConsole/storageConsole",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "找队友",
+					"pathName": "pages/findPerson/findPerson",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"scene": null
+				}
+			]
+		}
+	}
+}

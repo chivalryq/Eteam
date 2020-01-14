@@ -1,0 +1,126 @@
+<!--pages/personDetail/personDetail.wxml-->
+<cu-custom class="topback" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">个人管理</view>
+</cu-custom>
+
+<scroll-view scroll-y class="scrollPage">
+  <view class="UCenter-bg">
+	<image class="avatar" src='{{userInfo.avatarUrl}}'></image>
+  <view class="nickname" style="font-size:15px">{{userInfo.nickName}}</view>
+    <image src="https://image.weilanwl.com/gif/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+  </view>
+<view class="cu-form-group margin-top">
+    <view class="title">姓名</view>
+    <input placeholder='{{name}}'  name='name'></input>
+  </view>
+	<view class="cu-form-group margin-top">
+    <view class="title" >专业</view>
+    <picker bindchange="MajorChange" value="{{major[majorIndex]}}" range="{{major}}" name='major'>
+      <view class="picker">
+        {{majorIndex?major[majorIndex]:'选择你的专业'}}
+      </view>
+    </picker>
+  </view>
+
+	<view class="cu-form-group margin-top">第一志愿岗位
+    <picker bindchange="PostChange" value="{{post[postIndex]}}" range="{{post}}" name='post'>
+      <view class="picker">
+        {{postIndex?post[postIndex]:'选择你能承担的岗位'}}
+      </view>
+    </picker>
+  </view>
+
+  <view class="cu-form-group margin-top">第二志愿岗位
+    <picker bindchange="Post2Change" value="{{post2[post2Index]}}" range="{{post2}}" name='post2'>
+      <view class="picker">
+        {{post2Index?post2[post2Index]:'选择你还可以承担的岗位'}}
+      </view>
+    </picker>
+  </view>
+
+<block class='margin-top' wx:if='{{postIndex<=1||post2Index==1||post2Index==2}}'>
+<view class='margin'>
+	<view class="action">
+      <text class="icon-title text-orange "></text>比较擅长什么？
+    </view>
+    <view class="margin-top">
+    
+<checkbox-group bindchange="checkboxChange" name='tech'>
+  <block wx:for="{{techList}}" wx:key>
+    <view class="cu-form-group">
+      <view class="title">{{item.value}}</view>
+	    <checkbox class="round" value='{{item.name}}' checked="{{item.checked}}"></checkbox>
+  </view>
+  </block>
+		</checkbox-group>
+  </view>
+	 
+  </view>
+</block>
+<block class='margin-top' wx:if='{{postIndex==2||postIndex==0||post2Index==3||post2Index==1}}'>
+<view class='margin'>
+	<view class="action">
+      <text class="icon-title text-orange "></text>比较擅长什么？
+    </view>
+    <view class="margin-top">
+	<checkbox-group bindchange="checkboxChange2" name='art'>
+<block wx:for="{{artList}}" wx:key>
+<view class="cu-form-group">
+  <view class="title">{{item.value}}</view>
+    <checkbox class="round" value='{{item.name}}' checked="{{item.checked}}"></checkbox>
+  </view>
+  </block>
+		</checkbox-group>
+  </view>
+	 
+  </view>
+</block>
+<block class='margin-top' wx:if='{{postIndex==2||postIndex==0||post2Index==3||post2Index==1}}'>
+<view class='margin'>
+	<view class="action">
+      <text class="icon-title text-orange "></text>能用哪些软件？
+    </view>
+    <view class="margin-top">
+	<checkbox-group bindchange="checkboxChange3" name='softwware'>
+<block wx:for="{{softwareList}}" wx:key>
+<view class="cu-form-group">
+  <view class="title">{{item.value}}</view>
+    <checkbox class="round" value='{{item.name}}' checked="{{item.checked}}"></checkbox>
+  </view>
+  </block>
+		</checkbox-group>
+  </view>
+  </view>
+	<view class="cu-bar bg-white margin-top margin-left margin-right">
+	
+    <view class="action">
+       <text class="icon-title text-orange "></text>作品展示
+    </view>
+    <view class="action">
+      {{imgList.length}}/4
+</view>
+    </view>
+
+  <view class="cu-form-group margin-left margin-right">
+    <view class="grid col-4 grid-square flex-sub">
+      <view class="padding-xs bg-img" style="background-image:url({{imgList[index]}})" wx:for="{{imgList}}" wx:key="{{index}}" bindtap="ViewImage" data-url="{{imgList[index]}}">
+        <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+          <text class="icon-close"></text>
+        </view>
+      </view>
+      <view class="padding-xs solids" bindtap="ChooseImage" wx:if="{{imgList.length<4}}">
+        <text class="icon-cameraadd"></text>
+      </view>
+    </view>
+  </view>
+</block>
+
+  <view class="cu-form-group margin-top">
+    <textarea name='introduce' data-placeholder='{{introduce}}' maxlength="-1"  placeholder-class="placeholder" class="{{textareaAValue?'value':''}}" bindinput="textareaAInput"></textarea>
+  </view>
+
+<view class="padding flex flex-direction">
+<button class='cu-btn bg-green margin-tb-sm lg' bindtap="personadd">提交</button>
+</view>
+</scroll-view>
