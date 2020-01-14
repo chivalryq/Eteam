@@ -3,6 +3,8 @@ const app = getApp()
 
 Page({
   data: {
+    openid: 'initial_openid',
+    url: "https://www.chival.xyz",
 		update: false,//页面是否应该刷新
 		StatusBar: app.globalData.StatusBar,
 		CustomBar: app.globalData.CustomBar,
@@ -39,6 +41,7 @@ Page({
 		}],
 		isCard:false
   },
+  
 	getUserInfo: function (e) {
 		console.log(e)
 		app.globalData.userInfo = e.detail.userInfo
@@ -67,7 +70,58 @@ wx.navigateTo({
       url: '../findGroup/findGroup',
     })
   },
+  login: function (openid, callback = null) {//openid用以检测是否已经登录过，callback回调函数
+    var that = this;
+    if (openid == "initial_openid") {
+      wx.login({
+        success: function (res) {
+          console.log(res.code)
+          //发送请求
+          wx.request({
+            url: that.data.url + '/getopenid', //接口地址
+            data: { 'code': res.code },
+            header: {
+              'content-type': 'application/x-www-form-urlencoded' //默认值
+            },
+            method: "POST",
+            success: function (res) {
+              console.log(res.data)
+              if (res.data.success == 1) {
+              app.globalData.openid = res.data.openid;
+              that.setData({
+                openid: res.data.openid
+              });
+              console.log(that.data.openid);
+              wx.hideLoading();//关闭提示
+              if (callback != null) {
+                callback();//执行回调函数
+              }
+              }
+              else{
+                console.log(res.data.msg)
+              }
+            },
+            fail: function (res) {
+              wx.showModal({
+                title: '很抱歉',
+                content: '网络似乎出现了问题0.0',
+                showCancel: false
+              });
+              wx.hideLoading();//关闭提示
+            }
+          });
+        }
+      });
+    }
+    else {
+      if (callback != null) {
+        callback();//如果已经登录，直接执行执行回调函数
+      }
+    }
+
+  },
   onLoad: function() {
+    this.login(this.data.openid),
     // 获取用户信息
     wx.getSetting({
       success: res => {
