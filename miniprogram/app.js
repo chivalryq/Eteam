@@ -1,53 +1,9 @@
 //app.js
 App({
-  login: function (openid, callback = null) {//openid用以检测是否已经登录过，callback回调函数
-    var that = this;
-    if (openid == "initial_openid") {
-      wx.login({
-        success: function (res) {
-          console.log(res.code)
-          //发送请求
-          wx.request({
-            url: app.globalData.url + '/user/getopenid', //接口地址
-            data: { 'code': res.code },
-            header: {
-              'content-type': 'application/x-www-form-urlencoded' //默认值
-            },
-            method: "POST",
-            success: function (res) {
-              console.log(res.data)
-              app.globalData.openid = res.data.openid;
-              that.setData({
-                openid: res.data.openid
-              });
-              console.log(app.globalDataopenid);
-              wx.hideLoading();//关闭提示
-              if (callback != null) {
-                callback();//执行回调函数
-              }
-            },
-            fail: function (res) {
-              wx.showModal({
-                title: '很抱歉',
-                content: '网络似乎出现了问题0.0',
-                showCancel: false
-              });
-              wx.hideLoading();//关闭提示
-            }
-          });
-        }
-      });
-    }
-    else {
-      if (callback != null) {
-        callback();//如果已经登录，直接执行执行回调函数
-      }
-    }
-
-  },
+  
 	onLoad: function () {
 	//	console.log(app.globalData.CustomBar)
-   login()
+
 	},
 	onLaunch: function () {
 
@@ -78,8 +34,7 @@ App({
    
   },
 	globalData:{
-    openid:'inital_openid',
-    url:"https://www.qworkplace.cn:5050",
+    openid:''
 	}
 })
 

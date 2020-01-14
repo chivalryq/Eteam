@@ -1,18 +1,18 @@
 // pages/addGroup/addGroup.js
+const app = getApp()
 Page({
-
+ 
 	/**
 	 * 页面的初始数据
 	 */
 	data: {
-    //id:'',
     imagesList:[],
     name:'',
 		major: [
       { id: '0001', value: "软件学院" }, { id: '0010', value: "信通学院" }, { id: '0011', value: "电子工程学院" }, { id: '0100', value: "计算机学院" }, { id: '0101', value: "自动化学院" }, { id: '0110', value: "经济管理学院" }, { id: '0111', value: "理学院" }, { id: '1000', value: "人文学院" }, { id: '1001', value: "媒体与设计艺术学院" }, { id: '1010', value: "现代邮政学院" }, { id: '1011', value: "网络空间安全学院" }, { id: '1100', value: "光电信息学院" }, { id: '1101', value:"国际学院"}
 		],
 		post: [
-      { id: '001', value: "策划" }, { id: '010', value: "技术" }, { id: '011', value: "美工" }, { id: '100', value:"文案"}
+      { id: '0', value: "策划" }, { id: '1', value: "技术" }, { id: '2', value: "美工" }, { id: '3', value:"文案"}
 		],
 		contest:[
       { id: '001', value: '大创' }, { id: '010', value: '小创' }, { id: '011', value: '雏雁计划' }, { id: '100', value: 'ACM/ICPC' }, { id: '101', value:'其他比赛'}
@@ -37,7 +37,7 @@ Page({
     wx.request({
       url: 'https://www.chival.xyz/create_team',
       data:{
-        //'id':e.detail.value.id,
+        'openid':app.globalData.openid,
         'manager_name':e.detail.value.name,
         'major':e.detail.value.major,
         'target':e.detail.value.contest,
@@ -47,7 +47,9 @@ Page({
         //'img_url': 
       },
       header: {
-        'content-type': 'application/json' // 默认值
+        'content-type': 'application/x-www-form-urlencoded'
+
+
       },
       method:'POST',
       success(res)
