@@ -9,16 +9,40 @@ Page({
 			majorIndex: e.detail.value
 		})
 	},
-	PostChange: function (e) {
+	PostListChange: function (e) {
 		console.log(e);
 		this.setData({
-			postIndex: e.detail.value
+			postListIndex: e.detail.value
 		})
 	},
-  Post2Change: function (e) {
+  Post2ListChange: function (e) {
     console.log(e);
     this.setData({
-      post2Index: e.detail.value
+      post2ListIndex: e.detail.value
+    })
+  },
+  CompetitionListChange: function (e) {
+    console.log(e);
+    this.setData({
+      competitionListIndex: e.detail.value
+    })
+  },
+  TechListChange: function (e) {
+    console.log(e);
+    this.setData({
+      techListIndex: e.detail.value
+    })
+  },
+  ArtListChange: function (e) {
+    console.log(e);
+    this.setData({
+      artListIndex: e.detail.value
+    })
+  },
+  SoftwareListChange: function (e) {
+    console.log(e);
+    this.setData({
+      softwareListIndex: e.detail.value
     })
   },
 	getUserInfo:function(e){
@@ -38,15 +62,23 @@ Page({
       nickName: ""//用户昵称
     },
 		haveAvatar:false,
+    name: '',
 		major:[
 			"软件学院", "信通学院", "电子工程学院", "计算机学院", "自动化学院", "经济管理学院", "理学院", "人文学院", "媒体与设计艺术学院", "现代邮政学院", "网络空间安全学院", "光电信息学院","国际学院"
 		],
-		post:[
+    competition:'',
+    competitionList:[
+      '大创','小创','雏雁计划','ACM/ICPC','其他比赛'
+    ],
+    post:'',
+    postList:[
 			"全能选手", "技术", "美工", "文案","策划"
 		],
-    post2: [
+    post2:'',
+    post2List: [
       "无","全能选手", "技术", "美工", "文案", "策划"
     ],
+    tech:'',
 		techList: [
       { name: '0', value: '前端' },
       { name: '1', value: '后端/服务器' },
@@ -55,6 +87,7 @@ Page({
       { name: '4', value: 'Android/ios开发' },
       { name: '5', value: '电子电路类' },
     ],
+    art:'',
 		artList: [
       { name: '0', value: 'UI设计' },
       { name: '1', value: '插画' },
@@ -62,6 +95,7 @@ Page({
       { name: '3', value: '人物原画' },
       { name: '4', value: '场景设计' },
     ],
+    software:'',
     softwareList: [
       { name: '0', value: 'Ps' },
       { name: '1', value: 'Ae' },
@@ -73,27 +107,44 @@ Page({
 		textareaAValue:'',
 		detail:{}
 	},
-  checkboxChange: function (e) {
+/*  CompetitionListChange: function (e) {
     console.log('checkbox发生change事件，携带value值为：', e.detail.value)
   },
-  checkboxChange2: function (e) {
+  PostListChange: function (e) {
     console.log('checkbox2发生change事件，携带value值为：', e.detail.value)
   },
-  checkboxChange3: function (e) {
+  PostList2Change: function (e) {
     console.log('checkbox3发生change事件，携带value值为：', e.detail.value)
-  },
+  },*/
 
-  submit:function(){
+  submit:function(e){
     var that = this;
+    wx.showLoading({
+    title: '请稍等',
+    })
+    console.log(e.detail.value)
+    this.setData({
+      detail: e.detail.value
+    })
     wx.request({
-      url: 'https://www.chival.xyz/somepage',
+      url: 'https://www.chival.xyz/create_person',
       method: 'post',
       data: {
-        usernickname:name,
-        major: majorIndex,
-        post: postIndex,
-        post2:post2Index,
-        introduce:introduce,
+        'openid': app.globalData.openid,
+        'name':
+e.detail.value.name,
+        'major': e.detail.value.major,
+        'resume':
+e.detail.value.resume,
+        'progress': e.detail.value.progress,
+        'expect_competition':
+e.detail.value.competition,
+        'post': e.detail.value.post,
+        'post2': e.detail.value.post2,
+        'tech': e.detail.value.tech,
+        'art': e.detail.value.art,
+        'software':
+e.detail.value.software,
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded' 

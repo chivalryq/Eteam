@@ -23,30 +23,39 @@
     </picker>
   </view>
 
-	<view class="cu-form-group margin-top">第一志愿岗位
-    <picker bindchange="PostChange" value="{{post[postIndex]}}" range="{{post}}" name='post'>
+	<view class="cu-form-group margin-top">
+    <view class="title" >期待的比赛</view>
+    <picker bindchange="CompetitionListChange" value="{{competitionList[competitionListIndex]}}" range="{{competitionList}}" name='competition'>
       <view class="picker">
-        {{postIndex?post[postIndex]:'选择你能承担的岗位'}}
+        {{competitionListIndex?competitionList[competitionListIndex]:'选择你期待的比赛'}}
+      </view>
+    </picker>
+  </view>
+
+	<view class="cu-form-group margin-top">第一志愿岗位
+    <picker bindchange="PostListChange" value="{{postList[postListIndex]}}" range="{{postList}}" name='post'>
+      <view class="picker">
+        {{postListIndex?postList[postListIndex]:'选择你能承担的岗位'}}
       </view>
     </picker>
   </view>
 
   <view class="cu-form-group margin-top">第二志愿岗位
-    <picker bindchange="Post2Change" value="{{post2[post2Index]}}" range="{{post2}}" name='post2'>
+    <picker bindchange="Post2ListChange" value="{{post2List[post2ListIndex]}}" range="{{post2List}}" name='post2'>
       <view class="picker">
-        {{post2Index?post2[post2Index]:'选择你还可以承担的岗位'}}
+        {{post2ListIndex?post2List[post2ListIndex]:'选择你还可以承担的岗位'}}
       </view>
     </picker>
   </view>
 
-<block class='margin-top' wx:if='{{postIndex<=1||post2Index==1||post2Index==2}}'>
+<block class='margin-top' wx:if='{{postListIndex<=1||post2ListIndex==1||post2ListIndex==2}}'>
 <view class='margin'>
 	<view class="action">
       <text class="icon-title text-orange "></text>比较擅长什么？
     </view>
     <view class="margin-top">
     
-<checkbox-group bindchange="checkboxChange" name='tech'>
+<checkbox-group bindchange="TechListChange" name='tech'>
   <block wx:for="{{techList}}" wx:key>
     <view class="cu-form-group">
       <view class="title">{{item.value}}</view>
@@ -58,13 +67,13 @@
 	 
   </view>
 </block>
-<block class='margin-top' wx:if='{{postIndex==2||postIndex==0||post2Index==3||post2Index==1}}'>
+<block class='margin-top' wx:if='{{postListIndex==2||postListIndex==0||post2ListIndex==3||post2ListIndex==1}}'>
 <view class='margin'>
 	<view class="action">
       <text class="icon-title text-orange "></text>比较擅长什么？
     </view>
     <view class="margin-top">
-	<checkbox-group bindchange="checkboxChange2" name='art'>
+	<checkbox-group bindchange="ArtListChange" name='art'>
 <block wx:for="{{artList}}" wx:key>
 <view class="cu-form-group">
   <view class="title">{{item.value}}</view>
@@ -76,13 +85,13 @@
 	 
   </view>
 </block>
-<block class='margin-top' wx:if='{{postIndex==2||postIndex==0||post2Index==3||post2Index==1}}'>
+<block class='margin-top' wx:if='{{postListIndex==2||postListIndex==0||post2ListIndex==3||post2ListIndex==1}}'>
 <view class='margin'>
 	<view class="action">
       <text class="icon-title text-orange "></text>能用哪些软件？
     </view>
     <view class="margin-top">
-	<checkbox-group bindchange="checkboxChange3" name='softwware'>
+	<checkbox-group bindchange="SoftwareListChange" name='software'>
 <block wx:for="{{softwareList}}" wx:key>
 <view class="cu-form-group">
   <view class="title">{{item.value}}</view>
@@ -93,7 +102,6 @@
   </view>
   </view>
 	<view class="cu-bar bg-white margin-top margin-left margin-right">
-	
     <view class="action">
        <text class="icon-title text-orange "></text>作品展示
     </view>
