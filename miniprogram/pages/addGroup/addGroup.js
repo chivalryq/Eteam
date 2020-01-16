@@ -40,10 +40,11 @@ Page({
         'openid':app.globalData.openid,
         'manager_name':e.detail.value.name,
         'major':e.detail.value.major,
-        'target':e.detail.value.contest,
-        'need':e.detail.value.post,
+        'target':e.detail.value.target,
+        'need':(e.detail.value.needPost).join('-'),
         'progress':e.detail.value.progress,
         'resume':e.detail.value.introduce,
+        'team_name':e.detail.value.projectName
         //'img_url': 
       },
       header: {

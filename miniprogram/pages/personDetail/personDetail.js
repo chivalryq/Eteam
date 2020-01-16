@@ -1,4 +1,5 @@
 // pages/personDetail/personDetail.js
+const app = getApp()
 Page({
   MajorChange: function (e) {
     console.log(e);
@@ -110,44 +111,26 @@ Page({
       { name: '4', value: 'Ai' },
     ],
     imgList: [],
-    textareaAValue: 'hello',
-    name: 'xxx',
-    resume:'aaa',
-    majorIndex: 1,
-    postIndex: 1,
-    post2Index: 4,
-    techIndex: [0,2],
-    artIndex: [2]
+    name:'',
+    resume:'',
+   /* major,
+    post1,
+    post2,
+    tech,
+    art,*/
+    textareaAValue:'',
 	},
 
-	/**
-	 * 生命周期函数--监听页面加载
-	 */
-	onLoad: function (options) {
-		this.setData({
-			personid: options.personid,
-		})
-	//	wx.cloud.init()
-		const db=wx.cloud.database()
-		var that=this;
-    wx.getUserInfo({
-      success: function (res) {
-        console.log(res); var avatarUrl = 'userInfo.avatarUrl'; var nickName = 'userInfo.nickName'; that.setData({ [avatarUrl]: res.userInfo.avatarUrl, [nickName]: res.userInfo.nickName, })
-      }
+  submit: function (e) {
+    var that = this;
+    wx.showLoading({
+      title: '请稍等',
     })
-	//	console.log(this.data.personid)
-	
-		db.collection("person").where({
-				_id:this.data.personid
-			}).get({
-				success(res){
-					that.setData({
-						persondetail:res.data[0],
-						detailLoaded: true
-					})
-				}
-      }),
-        wx.request({
+    console.log(e.detail.value)
+    this.setData({
+      detail: e.detail.value
+    })
+    wx.request({
       url: 'https://www.chival.xyz/create_person',
       method: 'post',
       data: {
@@ -163,16 +146,49 @@ Page({
         'art': e.detail.value.art.join('-'),
         'software': e.detail.value.software.join('-'),
       },
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
-          },
-          success: function (res) {
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        console.log("上传成功")
+        console.log(res)
+      }
+    })
+  },
 
-          },
-          fail: function (err) {
-
-          }
+	/**
+	 * 生命周期函数--监听页面加载
+	 */
+  onLoad: function (options) {
+    
+    this.setData({
+      personid: options.personid,
+    })
+    //	wx.cloud.init()
+    const db = wx.cloud.database()
+    var that = this
+    wx.request({
+      url: 'https://www.chival.xyz/create_person',
+      header: {"Content-Type": "applciation/json"},
+      method: "GET",
+      success: function (res) {
+        console.log(res);
+        that.setData({
+          openid: res.openid,
+          name: res.name,
+          major: res.major,
+          textareaAValue: res.resume,
+          competition:
+            res.expect_competition,
+          post1:res.post1,
+          post2: res.post2,
+          art: res.art,
+          tech: res.tech,
+          software: res.software,
         })
+      }
+    })
+    //	console.log(this.data.personid)
 	//	console.log('this.data.persondetail' + this.data.persondetail)
 	},
 
