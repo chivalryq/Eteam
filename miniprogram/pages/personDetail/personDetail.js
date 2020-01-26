@@ -6,40 +6,40 @@ Page({
       majorIndex: e.detail.value
     })
   },
-  PostListChange: function (e) {
+  PostChange: function (e) {
     console.log(e);
     this.setData({
-      postListIndex: e.detail.value
+      postIndex: e.detail.value
     })
   },
-  Post2ListChange: function (e) {
+  Post2Change: function (e) {
     console.log(e);
     this.setData({
-      post2ListIndex: e.detail.value
+      post2Index: e.detail.value
     })
   },
-  CompetitionListChange: function (e) {
+  CompetitionChange: function (e) {
     console.log(e);
     this.setData({
-      competitionListIndex: e.detail.value
+      competitionIndex: e.detail.value
     })
   },
-  TechListChange: function (e) {
+  TechChange: function (e) {
     console.log(e);
     this.setData({
-      techListIndex: e.detail.value
+      techIndex: e.detail.value
     })
   },
-  ArtListChange: function (e) {
+  ArtChange: function (e) {
     console.log(e);
     this.setData({
-      artListIndex: e.detail.value
+      artIndex: e.detail.value
     })
   },
-  SoftwareListChange: function (e) {
+  SoftwareChange: function (e) {
     console.log(e);
     this.setData({
-      softwareListIndex: e.detail.value
+      softwareIndex: e.detail.value
     })
   },
 	/**
@@ -51,22 +51,43 @@ Page({
       nickName: ""//用户昵称
     },
     major: [
-      "软件学院", "信通学院", "电子工程学院", "计算机学院", "自动化学院", "经济管理学院", "理学院", "人文学院", "媒体与设计艺术学院", "现代邮政学院", "网络空间安全学院", "光电信息学院", "国际学院"
+      { name: '0', value: '软件学院' },
+      { name: '1', value: '信通学院' },
+      { name: '2', value: '电子工程学院' },
+      { name: '3', value: '计算机学院' },
+      { name: '4', value: '自动化学院' },
+      { name: '5', value: '经济管理学院' },
+      { name: '6', value: '理学院' },
+      { name: '7', value: '人文学院' },
+      { name: '8', value: '媒体与设计艺术学院' },
+      { name: '9', value: '现代邮政学院' },
+      { name: '10', value: '网络空间安全学院' },
+      { name: '11', value: '光电信息学院' },
+      { name: '12', value: '国际学院' }
     ],
-    competition: '',
-    competitionList: [
-      '大创', '小创', '雏雁计划', 'ACM/ICPC', '其他比赛'
+    competition: [
+      { name: '0', value: '大创' },
+      { name: '1', value: '小创' },
+      { name: '2', value: '雏雁计划' },
+      { name: '3', value: 'ACM/ICPC' },
+      { name: '4', value: '其他比赛' }
     ],
-    post: '',
-    postList: [
-      "全能选手", "技术", "美工", "文案", "策划"
+    post1: [
+      { name: '0', value: '全能选手' },
+      { name: '1', value: '技术' },
+      { name: '2', value: '美工' },
+      { name: '3', value: '文案' },
+      { name: '4', value: '策划' }
     ],
-    post2: '',
-    post2List: [
-      "无", "全能选手", "技术", "美工", "文案", "策划"
+    post2: [
+      { name: '0', value: '无' },
+      { name: '1', value: '全能选手' },
+      { name: '2', value: '技术' },
+      { name: '3', value: '美工' },
+      { name: '4', value: '文案' },
+      { name: '5', value: '策划' }
     ],
-    tech: '',
-    techList: [
+    tech: [
       { name: '0', value: '前端' },
       { name: '1', value: '后端/服务器' },
       { name: '2', value: '小程序开发' },
@@ -74,16 +95,14 @@ Page({
       { name: '4', value: 'Android/ios开发' },
       { name: '5', value: '电子电路类' },
     ],
-    art: '',
-    artList: [
+    art: [
       { name: '0', value: 'UI设计' },
       { name: '1', value: '插画' },
       { name: '2', value: '三维建模' },
       { name: '3', value: '人物原画' },
       { name: '4', value: '场景设计' },
     ],
-    software: '',
-    softwareList: [
+    software: [
       { name: '0', value: 'Ps' },
       { name: '1', value: 'Ae' },
       { name: '2', value: 'SAI' },
@@ -91,14 +110,14 @@ Page({
       { name: '4', value: 'Ai' },
     ],
     imgList: [],
-    textareaAValue: '',
+    textareaAValue: 'hello',
     name: 'xxx',
+    resume:'aaa',
     majorIndex: 1,
-    postListIndex: 1,
-    post2ListIndex: 4,
-    introduce: 'hello',
-    tech: '算法',
-    art: 'Ps'
+    postIndex: 1,
+    post2Index: 4,
+    techIndex: [0,2],
+    artIndex: [2]
 	},
 
 	/**
@@ -129,15 +148,21 @@ Page({
 				}
       }),
         wx.request({
-          url: 'https://www.chival.xyz/somepage',
-          method: 'get',
-          data: {
-            usernickname: name,
-            major: majorIndex,
-            post: postIndex,
-            post2: post2Index,
-            introduce: introduce,
-          },
+      url: 'https://www.chival.xyz/create_person',
+      method: 'post',
+      data: {
+        'openid': app.globalData.openid,
+        'name': e.detail.value.name,
+        'major': e.detail.value.major,
+        'resume': e.detail.value.textareaAValue,
+        'expect_competition':
+          e.detail.value.competition,
+        'post1': e.detail.value.post1,
+        'post2': e.detail.value.post2,
+        'tech': e.detail.value.tech.join('-'),
+        'art': e.detail.value.art.join('-'),
+        'software': e.detail.value.software.join('-'),
+      },
           header: {
             'content-type': 'application/x-www-form-urlencoded'
           },
