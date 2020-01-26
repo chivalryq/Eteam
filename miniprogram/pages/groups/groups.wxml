@@ -1,0 +1,50 @@
+<!--miniprogram/pages/groups/groups.wxml-->
+<cu-custom bgColor="bg-gradual-red" isBack="{{true}}">
+	<view slot="backText">返回</view>
+	<view slot="content">队伍管理</view>
+</cu-custom>
+<view class="cu-item shadow-lg">
+	<view class="cu-card dynamic {{isCard?'no-card':''}} ">
+  <view class="cu-item shadow margin-tb-xs">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item">
+        <view class="cu-avatar round lg" style="background-image:url({{avatarUrl}});"></view>
+        <view class="content flex-sub">
+          <view>{{name}}</view>
+          <view class="text-gray text-sm flex justify-between">
+            学院：{{major}}
+          </view>
+          <view class="text-gray text-sm flex justify-between">
+            2019年12月3日
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="text-content">
+            意向：{{post}}、{{post2}}
+          </view>
+          <view class="text-content">
+            技能：
+          </view>
+          <block wx:if="{{post=='技术'||post=='全能选手'||post2=='技术'||post2=='全能选手'}}">
+<view class='cu-item'>
+      <text class="icon-lightfill text-yellow margin-left"></text>{{tech}}
+		</view>
+</block>
+<block wx:if="{{post=='美工'||post=='全能选手'||post2=='美工'||post2=='全能选手'}}">
+<view class='cu-item'>
+      <text class="icon-lightfill text-yellow margin-left"></text>{{art}}
+		</view>
+</block>
+    <view class="text-content">
+      自我介绍：{{introduce}}
+    </view>
+    <view class="grid flex-sub padding-lr {{isCard?'col-3 grid-square':'col-1'}}">
+      <view class="bg-img {{isCard?'':'only-img'}}" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);" wx:for="{{isCard?9:1}}" wx:key="{{index}}">
+      </view>
+    </view>
+    <view class="text-gray text-sm text-right padding">
+    </view>
+  </view>
+  </view>
+</view>

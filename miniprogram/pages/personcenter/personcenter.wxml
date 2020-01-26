@@ -15,7 +15,7 @@
     <text>个人管理</text>
 
   </view>
-  <view class="item">
+  <view class="item" bindtap='gogroups'>
     <image class="itemtag" src="images/tech.png"></image>
     <text>队伍管理</text>
   </view>
