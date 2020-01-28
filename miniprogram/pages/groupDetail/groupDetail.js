@@ -6,6 +6,7 @@ Page({
 	 * 页面的初始数据
 	 */
   data: {
+    id:'2',
     imagesList: [],
     name: '',
     major: [
@@ -35,10 +36,24 @@ Page({
     this.setData({
       detail: e.detail.value
     })
+    if(e.detail.value.major==null){
+      e.detail.value.major=this.data.nowMajor
+    }
+    if(e.detail.value.target==null){
+      e.detail.value.target=this.data.nowContest
+    }
     wx.request({
-      url: 'https://www.chival.xyz/create_team',
+      url: 'https://www.chival.xyz/update_team',
       data: {
+        'id':this.data.id,
         'openid': app.globalData.openid,
+        'manager_name':this.data.name,
+        'major': e.detail.value.major,
+        'target': e.detail.value.target,
+        'need': (e.detail.value.needPost).join('-'),
+        'progress': this.data.progress,
+        'resume': this.data.introduce,
+        'team_name': this.data.projectName
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -49,7 +64,7 @@ Page({
       success(res) {
         if (res.statusCode == 200) {
           console.log("上传成功")
-
+          console.log(res)
         } else {
           console.log('上传失败')
         }
