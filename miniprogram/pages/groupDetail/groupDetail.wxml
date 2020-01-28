@@ -26,7 +26,7 @@
     <view class="title">目标比赛</view>
     <picker bindchange="ContestChange" value="{{contestIndex}}" range="{{contest}}" range-key="value" name='target'>
       <view class="picker">
-        {{contestIndex?contest[contestIndex].value:contest[nowContext].value}}
+        {{contestIndex?contest[contestIndex].value:contest[nowContest].value}}
       </view>
     </picker>
   </view>
@@ -72,6 +72,6 @@
 		</checkbox-group>
 
 <view class="padding flex flex-direction">
-<button class='cu-btn bg-orange margin-tb-sm lg' form-type='submit'>提交</button>
+<button class='cu-btn bg-orange margin-tb-sm lg' form-type='submit'>修改</button>
 </view>
 </form>

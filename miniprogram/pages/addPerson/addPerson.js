@@ -132,7 +132,10 @@ Page({
     ],
 		imgList:[],
     textareaAValue:'',
-		detail:{}
+		detail:{},
+    addtech:[],
+    addart: [],
+    addsoftware: []
 	},
 
   submit:function(e){
@@ -144,6 +147,15 @@ Page({
     this.setData({
       detail: e.detail.value
     })
+    if (e.detail.value.techList!= null) {
+      this.data.addtech = e.detail.value.techList
+    }
+    if (e.detail.value.artList != null) {
+      this.data.addart = e.detail.value.artList
+    }
+    if (e.detail.value.softwareList != null) {
+      this.data.addsoftware = e.detail.value.softwareList
+    }
     wx.request({
       url: 'https://www.chival.xyz/create_person',
       method: 'post',
@@ -156,9 +168,9 @@ Page({
           e.detail.value.competition,
         'post1': e.detail.value.post1,
         'post2': e.detail.value.post2,
-        'tech': e.detail.value.tech.join('-'),
-        'art': e.detail.value.art.join('-'),
-        'software': e.detail.value.software.join('-'),
+        'tech': (this.data.addtech).join('-'),
+        'art': (this.data.addart).join('-'),
+        'software': (this.data.addsoftware).join('-'),
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded' 
@@ -166,6 +178,7 @@ Page({
       success :function(res) {
           console.log("上传成功")
           console.log(res)
+        console.log(app.globalData.openid)
       }
     })
   },
