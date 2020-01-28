@@ -6,7 +6,7 @@
 <form bindsubmit='submit'>
   <view class="cu-form-group margin-top">
     <view class="title">姓名</view>
-    <input class="input" name='name' value='name' maxlength="80" ></input>
+    <input class="input" name='name' value='{{name}}' maxlength="80" ></input>
   </view>
 	<view class="cu-form-group margin-top">
     <view class="title" >专业</view>
@@ -20,7 +20,7 @@
 	<view class="action margin-tb"><text class="icon-title text-green "></text>项目信息</view>
  <view class="cu-form-group margin-top">
     <view class="title">项目名称</view>
-    <input placeholder="Eteam" name='projectName'></input>
+    <input value='{{projectName}}' name='{{projectName}}'></input>
   </view>
   <view class="cu-form-group">
     <view class="title">目标比赛</view>
@@ -32,11 +32,11 @@
   </view>
   <view class="cu-form-group">
   <view class="title">项目简述</view>
-    <textarea name='introduce' data-placeholder="简单描述一下项目的概况，人员组成等，让其他人更了解项目情况，也可以留下QQ之类的联系方式方便其他人进一步交流" maxlength="2048"  placeholder-class="placeholder" class="{{textareaAValue?'value':''}}" bindinput="textareaAInput"></textarea>
+    <textarea name='introduce' value='{{introduce}}' maxlength="2048"  placeholder-class="placeholder" class="{{textareaAValue?'value':''}}" bindinput="textareaAInput"></textarea>
   </view> 
   <view class="cu-form-group">
   <view class="title">项目进度</view>
-    <textarea name='progress' data-placeholder="简要介绍一下项目目前的进度" maxlength="512"  placeholder-class="placeholder" class="{{textareaAValue?'value':''}}" bindinput="textareaAInput"></textarea>
+    <textarea name='progress' value='{{progress}}' maxlength="512"  placeholder-class="placeholder" class="{{textareaAValue?'value':''}}" bindinput="textareaAInput"></textarea>
   </view> 
   	<view class="action margin-tb"><text class="icon-title text-green "></text>图片上传</view>
    <view class="cu-form-group margin-top">
