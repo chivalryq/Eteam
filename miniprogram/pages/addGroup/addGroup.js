@@ -19,6 +19,7 @@ Page({
 		],
     introduce:'',
     progress:'',
+    projectName:'',
     techList: [{ id: '001', value: "前端" }, { id: '010', value: "后端/服务器" }, { id: '011', value: "小程序开发" }, { id: '100', value: '算法' }, { id: '101', value: 'Android/ios开发' }, { id: '110', value: '电子电路类'}],
     artList: [{ id: '001', value: 'UI设计' }, { id: '010', value: '插画' }, { id: '011', value: '三维建模' }, { id: '100', value: '人物原画' }, { id: '101', value:'场景设计'}],
     softwareList: [{ id: '001', value: 'Ps' }, { id: '010', value: 'Ae' }, { id: '011', value: 'SAI' }, { id: '100', value: 'Pr' }, { id: '101', value:'Ai'}],
