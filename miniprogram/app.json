@@ -4,6 +4,7 @@
     "pages/addPerson/addPerson",
     "pages/addGroup/addGroup",
     "pages/findPerson/findPerson",
+    "pages/findPersonDetail/findPersonDetail",
     "pages/personDetail/personDetail",
     "pages/findGroup/findGroup",
     "pages/personcenter/personcenter",

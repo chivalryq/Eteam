@@ -17,7 +17,7 @@ Page({
   },
   gogroups: function () {
     wx.navigateTo({
-      url: '../groupDetail/groupDetail',
+      url: '../groups/groups',
     })
   },
   /**
