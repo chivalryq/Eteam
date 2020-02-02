@@ -156,9 +156,9 @@ Page({
           e.detail.value.competition,
         'post1': e.detail.value.post1,
         'post2': e.detail.value.post2,
-        'tech': e.detail.value.tech.join('-'),
-        'art': e.detail.value.art.join('-'),
-        'software': e.detail.value.software.join('-'),
+        'tech': (e.detail.value.techList).join('-'),
+        'art': (e.detail.value.artList).join('-'),
+        'software': (e.detail.value.softwareList).join('-'),
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded' 

@@ -58,8 +58,8 @@
     </view>
     <view class="margin-top">
     
-<checkbox-group bindchange="TechChange" name='tech'>
-  <block wx:for="{{tech}}" wx:key>
+<checkbox-group name='techList'>
+  <block wx:for="{{tech}}" wx:key='name'>
     <view class="cu-form-group">
       <view class="title">{{item.value}}</view>
 	    <checkbox class="round" value='{{item.name}}' checked="{{item.checked}}"></checkbox>
@@ -76,8 +76,8 @@
       <text class="icon-title text-orange "></text>比较擅长什么？
     </view>
     <view class="margin-top">
-	<checkbox-group bindchange="ArtChange" name='art'>
-<block wx:for="{{art}}" wx:key>
+	<checkbox-group name='artList'>
+<block wx:for="{{art}}" wx:key='name'>
 <view class="cu-form-group">
   <view class="title">{{item.value}}</view>
     <checkbox class="round" value='{{item.name}}' checked="{{item.checked}}"></checkbox>
@@ -94,8 +94,8 @@
       <text class="icon-title text-orange "></text>能用哪些软件？
     </view>
     <view class="margin-top">
-	<checkbox-group bindchange="SoftwareChange" name='software'>
-<block wx:for="{{software}}" wx:key>
+	<checkbox-group name='softwareList'>
+<block wx:for="{{software}}" wx:key='name'>
 <view class="cu-form-group">
   <view class="title">{{item.value}}</view>
     <checkbox class="round" value='{{item.name}}' checked="{{item.checked}}"></checkbox>
