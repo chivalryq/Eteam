@@ -1,1 +1,8 @@
 /* miniprogram/pages/groups/groups.wxss */
+.text-content{
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}

@@ -6,7 +6,7 @@ Page({
 	 * 页面的初始数据
 	 */
   data: {
-    id:'2',
+    id:'',
     imagesList: [],
     name: '',
     major: [
@@ -214,12 +214,11 @@ Page({
   //},
   request: function (e) {
     var that = this
-   // console.log(app.globalData.openid)
     wx.request({
       url: 'https://www.chival.xyz/get_team',
       data: {
         'openid':app.globalData.openid,
-        'id':2
+        'id':that.data.id
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -249,6 +248,10 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
   onLoad: function (options) {
+    this.setData({
+      id:options.id
+    })
+    console.log(this.data.id)
       this.request();
   },
 
