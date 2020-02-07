@@ -25,7 +25,8 @@ Page({
 				icon: 'discoverfill',
 				color: 'purple',
 				badge: 0,
-				name: '找队伍'
+				name: '找队伍',
+        nav:"findGroup"
 			}, {
 			icon: 'friendfamous',
 			color: 'orange',
