@@ -1,4 +1,4 @@
-// miniprogram/pages/groupDetail/groupDetail.js
+ // miniprogram/pages/groupDetail/groupDetail.js
 const app = getApp()
 Page({
 

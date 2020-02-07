@@ -1,4 +1,5 @@
 // pages/personDetail/personDetail.js
+const app = getApp()
 Page({
   MajorChange: function (e) {
     console.log(e);
@@ -109,70 +110,193 @@ Page({
       { name: '3', value: 'Pr' },
       { name: '4', value: 'Ai' },
     ],
-    imgList: [],
-    textareaAValue: 'hello',
-    name: 'xxx',
-    resume:'aaa',
-    majorIndex: 1,
-    postIndex: 1,
-    post2Index: 4,
-    techIndex: [0,2],
-    artIndex: [2]
+    imagesList: [],
+    name: '',
+    exresume: '',
+    exmajor: '',
+    expost1: '',
+    expost2: '',
+    extech: [],
+    exart:[] ,
+    exsoftware: [],
+    excompetition:'',
+    textareaAValue: '',
 	},
 
+  submit: function (e) {
+    var that = this;
+    wx.showLoading({
+      title: '请稍等',
+    })
+    console.log(e.detail.value)
+    this.setData({
+      detail: e.detail.value
+    })
+    if (e.detail.value.major != null) {
+      this.data.exmajor = e.detail.value.major
+    }
+    if (e.detail.value.textareaAValue != null) {
+      this.data.exresume = e.detail.value.textareaAValue
+    }
+    if (e.detail.value.competition != null) {
+      this.data.excompetition = e.detail.value.competition
+    }
+    if (e.detail.value.post1 != null) {
+      this.data.expost1 = e.detail.value.post1
+    }
+    if (e.detail.value.post2 != null) {
+      this.data.expost2 = e.detail.value.post2
+    }
+    if (e.detail.value.techList != null) {
+      this.data.extech = e.detail.value.techList
+    }
+    if (e.detail.value.artList != null) {
+      this.data.exart = e.detail.value.artList
+    }
+    if (e.detail.value.softwareList != null) {
+      this.data.exsoftware = e.detail.value.softwareList
+    }
+    wx.request({
+      url: 'https://www.chival.xyz/update_person',
+      method: 'post',
+      data: {
+        'id': this.data.id,
+        'openid': app.globalData.openid,
+        'name': this.data.name,
+        'major': this.data.exmajor,
+        'resume': e.detail.value.exresume,
+        'expect_competition':
+          this.data.excompetition,
+        'post1': this.data.expost1,
+        'post2': this.data.expost2,
+        'tech': this.data.extech.join('-'),
+        'art': this.data.exart.join('-'),
+        'software': this.data.exsoftware.join('-'),
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        console.log("上传成功")
+        console.log(res)
+      }
+    })
+    for (var i = 0; i < that.data.imagesList.length; i++) {
+      wx.uploadFile({
+        url: 'https://www.chival.xyz/somepage',
+        filePath: that.data.imagesList[i],//这里是图片临时文件路径
+        name: 'some_key',
+        success() {
+
+        },
+        fail() {
+
+        },
+        complete() {
+
+        }
+
+      })
+    }
+  },
+
+  uploader: function () {
+    var that = this;
+    let imagesList = [];
+    let maxSize = 1024 * 1024;
+    let maxLength = 9;
+    let flag = true;
+    wx.chooseImage({
+      count: 9, //最多可以选择的图片总数
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+
+        for (let i = 0; i < res.tempFiles.length; i++) {
+          if (res.tempFiles[i].size > maxSize) {
+            flag = false;
+            console.log(111)
+            wx.showModal({
+              content: '图片太大，不允许上传',
+              showCancel: false,
+              success: function (res) {
+                if (res.confirm) {
+                  console.log('用户点击确定')
+                }
+              }
+            });
+
+          }
+        }
+        if (res.tempFiles.length > maxLength) {
+          console.log('222');
+          wx.showModal({
+            content: '最多能上传' + maxLength + '张图片',
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {
+                console.log('确定');
+              }
+            }
+          })
+        }
+        if (flag == true && res.tempFiles.length <= maxLength) {
+          that.setData({
+            imagesList: res.tempFilePaths
+          })
+        }
+        console.log(res);
+      },
+      fail: function (res) {
+        console.log(res);
+      }
+    })
+  },
+
+  request: function (e) {
+    var that = this
+    wx.request({
+      url: 'https://www.chival.xyz/get_person',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: "GET",
+      data: {
+        'openid': app.globalData.openid
+      },
+      success (res) {
+        if (res.statusCode == 200) {
+          console.log("请求成功")
+          console.log(res);
+          that.setData({
+            name: res.data.person.name,
+            exmajor: res.data.person.major,
+            exresume: res.data.person.resume,
+            excompetition:
+              res.data.person.expect_competition,
+            expost1: res.data.person.post1,
+            expost2: res.data.person.post2,
+            extech:
+(res.data.person.tech).split("-"),
+            exart: 
+              (res.data.person.art).split("-"),
+            exsoftware: (res.data.person.software).split("-"),
+        })
+      }
+        else {
+          console.log('请求失败')
+        }
+      }
+    })
+  },
+ 
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
-	onLoad: function (options) {
-		this.setData({
-			personid: options.personid,
-		})
-	//	wx.cloud.init()
-		const db=wx.cloud.database()
-		var that=this;
-    wx.getUserInfo({
-      success: function (res) {
-        console.log(res); var avatarUrl = 'userInfo.avatarUrl'; var nickName = 'userInfo.nickName'; that.setData({ [avatarUrl]: res.userInfo.avatarUrl, [nickName]: res.userInfo.nickName, })
-      }
-    })
-	//	console.log(this.data.personid)
-	
-		db.collection("person").where({
-				_id:this.data.personid
-			}).get({
-				success(res){
-					that.setData({
-						persondetail:res.data[0],
-						detailLoaded: true
-					})
-				}
-      }),
-        wx.request({
-      url: 'https://www.chival.xyz/create_person',
-      method: 'post',
-      data: {
-        'openid': app.globalData.openid,
-        'name': e.detail.value.name,
-        'major': e.detail.value.major,
-        'resume': e.detail.value.textareaAValue,
-        'expect_competition':
-          e.detail.value.competition,
-        'post1': e.detail.value.post1,
-        'post2': e.detail.value.post2,
-        'tech': e.detail.value.tech.join('-'),
-        'art': e.detail.value.art.join('-'),
-        'software': e.detail.value.software.join('-'),
-      },
-          header: {
-            'content-type': 'application/x-www-form-urlencoded'
-          },
-          success: function (res) {
+  onLoad: function (options) {
+    this.request();
 
-          },
-          fail: function (err) {
-
-          }
-        })
+    //	console.log(this.data.personid)
 	//	console.log('this.data.persondetail' + this.data.persondetail)
 	},
 
