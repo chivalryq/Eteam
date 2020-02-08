@@ -235,7 +235,7 @@ Page({
             progress:res.data.team.progress,
             nowMajor:res.data.team.major,
             nowContest:res.data.team.target,
-            nowPost:res.data.team.need.split("-")
+            nowPost: res.data.team.need.split("-")
           })
 
         } else {
@@ -253,6 +253,7 @@ Page({
     })
     console.log(this.data.id)
       this.request();
+    console.log(this.data.nowPost)
   },
 
 	/**

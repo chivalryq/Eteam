@@ -132,6 +132,7 @@ Page({
     ],
 		imgList:[],
     textareaAValue:'',
+    resume:'',
 		detail:{},
     addtech:[],
     addart: [],
@@ -156,6 +157,9 @@ Page({
     if (e.detail.value.softwareList != null) {
       this.data.addsoftware = e.detail.value.softwareList
     }
+    if (e.detail.value.resume != null) {
+      this.data.resume = e.detail.value.resume
+    }
     wx.request({
       url: 'https://www.chival.xyz/create_person',
       method: 'post',
@@ -163,7 +167,7 @@ Page({
         'openid': app.globalData.openid,
         'name': e.detail.value.name,
         'major': e.detail.value.major,
-        'resume': e.detail.value.textareaAValue,
+        'resume': this.data.resume,
         'expect_competition':
           e.detail.value.competition,
         'post1': e.detail.value.post1,

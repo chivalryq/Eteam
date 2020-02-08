@@ -122,6 +122,8 @@ Page({
     excompetition: '',
     textareaAValue: '',
     personid:'',
+    post:[],
+    postString:[]
   },
 
   uploader: function () {
@@ -186,7 +188,8 @@ Page({
       },
       method: "GET",
       data: {
-        'personid': that.data.personid
+        'openid': app.globalData.openid,
+        'id': that.data.personid
       },
       success(res) {
         if (res.statusCode == 200) {
@@ -205,6 +208,22 @@ Page({
             exart:
               (res.data.person.art).split("-"),
             exsoftware: (res.data.person.software).split("-"),
+          })
+          if (that.data.name == null) {
+            that.data.name = '无'
+          }
+          for (var i = 0; i < that.data.extech.length; i++) {
+            that.data.post.push(that.data.tech[that.data.extech[i]].value)
+          }
+          for (var i = 0; i < that.data.exart.length; i++) {
+            that.data.post.push(that.data.tech[that.data.exart[i]].value)
+          }
+          for (var i = 0; i < that.data.exsoftware.length; i++) {
+            that.data.post.push(that.data.tech[that.data.exsoftware[i]].value)
+          }
+          console.log(that.data.post)
+          that.setData({
+            postString: that.data.post.join("，")
           })
         }
         else {

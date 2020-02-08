@@ -30,7 +30,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 8,
+			"current": 9,
 			"list": [
 				{
 					"id": -1,
@@ -91,6 +91,13 @@
 					"id": -1,
 					"name": "pages/addPerson/addPerson",
 					"pathName": "pages/addPerson/addPerson",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/findGroup/findGroup",
+					"pathName": "pages/findGroup/findGroup",
 					"scene": null
 				}
 			]

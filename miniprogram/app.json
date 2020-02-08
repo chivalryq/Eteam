@@ -9,7 +9,8 @@
     "pages/findGroup/findGroup",
     "pages/personcenter/personcenter",
     "pages/groupDetail/groupDetail",
-    "pages/groups/groups"
+    "pages/groups/groups",
+    "pages/groupForShow/groupForShow"
   ],
   "window": {
     "navigationStyle": "custom"

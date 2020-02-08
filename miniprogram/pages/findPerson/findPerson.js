@@ -1,4 +1,5 @@
 // pages/findPerson/findPerson.js
+const app = getApp()
 Page({
 
 	/**
@@ -73,7 +74,7 @@ Page({
   onItemClick: function (e) {
     console.log(e.currentTarget.dataset.personid)
     wx.navigateTo({
-      url: '../findPersonDetail/findPersonDetail?personid=' + e.currentTarget.dataset.personid,
+      url: '../findPersonDetail/findPersonDetail?personid=' + e.currentTarget.dataset.id,
     })
   },
   
@@ -84,13 +85,16 @@ Page({
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
+      data: {
+        'openid': app.globalData.openid
+      },
       method: "GET",
       success(res) {
         if (res.statusCode == 200) {
           console.log("请求成功")
           console.log(res)
           that.setData({
-            person: res.data.person
+            person: res.data.people
           })
           console.log(that.data.person)
         }

@@ -7,10 +7,10 @@ Page({
       majorIndex: e.detail.value
     })
   },
-  PostChange: function (e) {
+  Post1Change: function (e) {
     console.log(e);
     this.setData({
-      postIndex: e.detail.value
+      post1Index: e.detail.value
     })
   },
   Post2Change: function (e) {
@@ -42,6 +42,13 @@ Page({
     this.setData({
       softwareIndex: e.detail.value
     })
+  },
+  textareaAInput: function (e) {
+
+    this.setData({
+      textareaAValue: e.detail.value
+    })
+
   },
 	/**
 	 * 页面的初始数据
@@ -282,6 +289,10 @@ Page({
               (res.data.person.art).split("-"),
             exsoftware: (res.data.person.software).split("-"),
         })
+          if (that.data.exresume == "undefined") {
+            that.data.exresume = '无'
+          }
+          console.log(that.data.exresume);
       }
         else {
           console.log('请求失败')

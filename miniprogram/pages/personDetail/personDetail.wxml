@@ -139,7 +139,7 @@
 
 <view class="cu-form-group margin-top">
   <view class="title">自我介绍</view>
-    <textarea name='resume' data-placeholder='{{exresume}}' maxlength="1024"  placeholder-class="placeholder" class="{{textareaAValue?'value':'exresume'}}" bindinput="textareaAInput"></textarea>
+  <textarea name='exresume' value='{{exresume}}' maxlength="1024"  placeholder-class="placeholder" class="{{textareaAValue==null?'value':''}}" bindinput="textareaAInput"></textarea>
 </view> 
 
 

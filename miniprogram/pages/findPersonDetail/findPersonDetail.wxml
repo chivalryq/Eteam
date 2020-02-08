@@ -1,126 +1,37 @@
 <!--pages/personDetail/personDetail.wxml-->
 <cu-custom class="topback" bgColor="bg-gradual-green" isBack="{{true}}">
 	<view slot="backText">返回</view>
-	<view slot="content">个人管理</view>
+	<view slot="content">个人信息</view>
 </cu-custom>
 
 <form bindsubmit='submit'>
   <view class="cu-form-group margin-top">
     <view class="title">姓名</view>
-    <input class="input" name='name' value='{{name}}' maxlength="80"></input>
+    <view class="text-content">{{name}}</view>
   </view>
 	<view class="cu-form-group margin-top">
     <view class="title" >专业</view>
-    <picker bindchange="MajorChange" value="{{majorIndex}}" range="{{major}}" range-key="value" name='major'>
-      <view class="picker">
-        {{majorIndex?major[majorIndex].value:major[exmajor].value}}
-      </view>
-    </picker>
+    <view class="text-content">{{major[exmajor].value}}</view>
   </view>
 
 	<view class="cu-form-group margin-top">
     <view class="title" >期待的比赛</view>
-    <picker bindchange="CompetitionChange" value="{{competitionIndex}}" range="{{competition}}" range-key="value" name='competition'>
-      <view class="picker">
-        {{competitionIndex?competition[competitionIndex].value:competition[excompetition].value}}
-      </view>
-    </picker>
+    <view class="text-content">{{competition[excompetition].value}}</view>
   </view>
 
 	<view class="cu-form-group margin-top">第一志愿岗位
-    <picker bindchange="Post1Change" value="{{post1Index}}" range="{{post1}}" range-key="value" name='post1'>
-      <view class="picker">
-        {{post1Index?post1[post1Index].value:post1[expost1].value}}
-      </view>
-    </picker>
+  <view class="text-content">{{post1[expost1].value}}</view>
   </view>
 
   <view class="cu-form-group margin-top">第二志愿岗位
-    <picker bindchange="Post2Change" value="{{post2Index}}" range="{{post2}}" range-key="value" name='post2'>
-      <view class="picker">
-        {{post2Index?post2[post2Index].value:post2[expost2].value}}
-      </view>
-    </picker>
+    <view class="text-content">{{post2[expost2].value}}</view>
   </view>
 
-<block class='margin-top' wx:if='{{(post1Index!=null && post1Index<=1)||(post2Index!=null &&  (post2Index==1||post2Index==2))||(post1Index==null && expost1<=1)||(post2Index==null && (expost2==1||expost2==2))}}'>
-<view class='margin'>
-	<view class="action">
-      <text class="icon-title text-orange "></text>比较擅长什么？
-    </view>
-    <wxs module="filter">
-    var isChecked = function(name,data){
-      return data.indexOf(name) !=-1 ? true:false;
-    }
-    module.exports = {
-      isChecked: isChecked
-    }
-  </wxs>
-    <view class="margin-top">
-    
-<checkbox-group bindchange="TechChange" name='techList'>
-  <block wx:for="{{tech}}" wx:key>
-    <view class="cu-form-group">
-      <view class="title">{{item.value}}</view>
-	    <checkbox class="round" value='{{item.name}}' checked='{{filter.isChecked(item.name,extech)}}'></checkbox>
+  <view class="cu-form-group margin-top">擅长的技能
+    <view class="text-content">{{postString}}</view>
   </view>
-  </block>
-		</checkbox-group>
-  </view>
-	 
-  </view>
-</block>
-<block class='margin-top' wx:if='{{(post1Index!=null && (post1Index==2||post1Index==0))||(post2Index!=null &&  (post2Index==3||post2Index==1))||(post1Index==null && (expost1==2||expost1==0))||(post2Index==null && (expost2==3||expost2==1))}}'>
-<view class='margin'>
-	<view class="action">
-      <text class="icon-title text-orange "></text>比较擅长什么？
-    </view>
-    <wxs module="filter">
-    var isChecked = function(name,data){
-      return data.indexOf(name) !=-1 ? true:false;
-    }
-    module.exports = {
-      isChecked: isChecked
-    }
-  </wxs>
-    <view class="margin-top">
-	<checkbox-group bindchange="ArtChange" name='artList'>
-<block wx:for="{{art}}" wx:key>
-<view class="cu-form-group">
-  <view class="title">{{item.value}}</view>
-    <checkbox class="round" value='{{item.name}}' checked='{{filter.isChecked(item.name,exart)}}'></checkbox>
-  </view>
-  </block>
-		</checkbox-group>
-  </view>
-	 
-  </view>
-</block>
-<block class='margin-top' wx:if='{{(post1Index!=null && (post1Index==2||post1Index==0))||(post2Index!=null &&  (post2Index==3||post2Index==1))||(post1Index==null && (expost1==2||expost1==0))||(post2Index==null && (expost2==3||expost2==1))}}'>
-<view class='margin'>
-	<view class="action">
-      <text class="icon-title text-orange "></text>能用哪些软件？
-    </view>
-    <wxs module="filter">
-    var isChecked = function(name,data){
-      return data.indexOf(name) !=-1 ? true:false;
-    }
-    module.exports = {
-      isChecked: isChecked
-    }
-  </wxs>
-    <view class="margin-top">
-	<checkbox-group bindchange="SoftwareChange" name='softwareList'>
-<block wx:for="{{software}}" wx:key>
-<view class="cu-form-group">
-  <view class="title">{{item.value}}</view>
-    <checkbox class="round" value='{{item.name}}' checked='{{filter.isChecked(item.name,exsoftware)}}'></checkbox>
-  </view>
-  </block>
-</checkbox-group>
-</view>
-  </view>
-  	<view class="action margin-tb"><text class="icon-title text-green "></text>作品展示</view>
+
+  	<view class="action margin-tb"><text class="icon-title text-green "></text>图片</view>
    <view class="cu-form-group margin-top">
 <view class="weui-uploader">
  <view class="weui-uploader__bd">
@@ -133,13 +44,12 @@
      <input class="weui-uploader__input js_file" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple=""      bindtap='uploader' name="images"></input>
   </view>
  </view>
- </view>
- </view>
-</block>
+</view>
+</view>
 
 <view class="cu-form-group margin-top">
   <view class="title">自我介绍</view>
-    <textarea name='resume' data-placeholder='{{exresume}}' maxlength="1024"  placeholder-class="placeholder" class="{{textareaAValue?'value':'exresume'}}" bindinput="textareaAInput"></textarea>
+    <view class="text-content">{{item.resume=='undefined'?'无':item.resume}}</view>
 </view> 
 
 
