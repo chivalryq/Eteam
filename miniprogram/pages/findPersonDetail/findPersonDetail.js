@@ -7,10 +7,10 @@ Page({
       majorIndex: e.detail.value
     })
   },
-  Post1Change: function (e) {
+  PostChange: function (e) {
     console.log(e);
     this.setData({
-      post1Index: e.detail.value
+      postIndex: e.detail.value
     })
   },
   Post2Change: function (e) {
@@ -43,17 +43,10 @@ Page({
       softwareIndex: e.detail.value
     })
   },
-  textareaAInput: function (e) {
-
-    this.setData({
-      textareaAValue: e.detail.value
-    })
-
-  },
 	/**
 	 * 页面的初始数据
 	 */
-	data: {
+  data: {
     userInfo: {
       avatarUrl: "",//用户头像
       nickName: ""//用户昵称
@@ -124,87 +117,13 @@ Page({
     expost1: '',
     expost2: '',
     extech: [],
-    exart:[] ,
+    exart: [],
     exsoftware: [],
-    excompetition:'',
+    excompetition: '',
     textareaAValue: '',
-	},
-
-  submit: function (e) {
-    var that = this;
-    wx.showLoading({
-      title: '请稍等',
-    })
-    console.log(e.detail.value)
-    this.setData({
-      detail: e.detail.value
-    })
-    if (e.detail.value.major != null) {
-      this.data.exmajor = e.detail.value.major
-    }
-    if (e.detail.value.textareaAValue != null) {
-      this.data.exresume = e.detail.value.textareaAValue
-    }
-    if (e.detail.value.competition != null) {
-      this.data.excompetition = e.detail.value.competition
-    }
-    if (e.detail.value.post1 != null) {
-      this.data.expost1 = e.detail.value.post1
-    }
-    if (e.detail.value.post2 != null) {
-      this.data.expost2 = e.detail.value.post2
-    }
-    if (e.detail.value.techList != null) {
-      this.data.extech = e.detail.value.techList
-    }
-    if (e.detail.value.artList != null) {
-      this.data.exart = e.detail.value.artList
-    }
-    if (e.detail.value.softwareList != null) {
-      this.data.exsoftware = e.detail.value.softwareList
-    }
-    wx.request({
-      url: 'https://www.chival.xyz/update_person',
-      method: 'post',
-      data: {
-        'id': this.data.id,
-        'openid': app.globalData.openid,
-        'name': this.data.name,
-        'major': this.data.exmajor,
-        'resume': e.detail.value.exresume,
-        'expect_competition':
-          this.data.excompetition,
-        'post1': this.data.expost1,
-        'post2': this.data.expost2,
-        'tech': this.data.extech.join('-'),
-        'art': this.data.exart.join('-'),
-        'software': this.data.exsoftware.join('-'),
-      },
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        console.log("上传成功")
-        console.log(res)
-      }
-    })
-    for (var i = 0; i < that.data.imagesList.length; i++) {
-      wx.uploadFile({
-        url: 'https://www.chival.xyz/somepage',
-        filePath: that.data.imagesList[i],//这里是图片临时文件路径
-        name: 'some_key',
-        success() {
-
-        },
-        fail() {
-
-        },
-        complete() {
-
-        }
-
-      })
-    }
+    personid:'',
+    post:[],
+    postString:[]
   },
 
   uploader: function () {
@@ -269,9 +188,10 @@ Page({
       },
       method: "GET",
       data: {
-        'openid': app.globalData.openid
+        'openid': app.globalData.openid,
+        'id': that.data.personid
       },
-      success (res) {
+      success(res) {
         if (res.statusCode == 200) {
           console.log("请求成功")
           console.log(res);
@@ -284,23 +204,35 @@ Page({
             expost1: res.data.person.post1,
             expost2: res.data.person.post2,
             extech:
-(res.data.person.tech).split("-"),
-            exart: 
+              (res.data.person.tech).split("-"),
+            exart:
               (res.data.person.art).split("-"),
             exsoftware: (res.data.person.software).split("-"),
-        })
-          if (that.data.exresume == "undefined") {
-            that.data.exresume = '无'
+          })
+          if (that.data.name == null) {
+            that.data.name = '无'
           }
-          console.log(that.data.exresume);
-      }
+          for (var i = 0; i < that.data.extech.length; i++) {
+            that.data.post.push(that.data.tech[that.data.extech[i]].value)
+          }
+          for (var i = 0; i < that.data.exart.length; i++) {
+            that.data.post.push(that.data.tech[that.data.exart[i]].value)
+          }
+          for (var i = 0; i < that.data.exsoftware.length; i++) {
+            that.data.post.push(that.data.tech[that.data.exsoftware[i]].value)
+          }
+          console.log(that.data.post)
+          that.setData({
+            postString: that.data.post.join("，")
+          })
+        }
         else {
           console.log('请求失败')
         }
       }
     })
   },
- 
+
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
@@ -308,55 +240,55 @@ Page({
     this.request();
 
     //	console.log(this.data.personid)
-	//	console.log('this.data.persondetail' + this.data.persondetail)
-	},
+    //	console.log('this.data.persondetail' + this.data.persondetail)
+  },
 
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */
-	onReady: function () {
-		
-	},
+  onReady: function () {
+
+  },
 
 	/**
 	 * 生命周期函数--监听页面显示
 	 */
-	onShow: function () {
-		
-	},
+  onShow: function () {
+
+  },
 
 	/**
 	 * 生命周期函数--监听页面隐藏
 	 */
-	onHide: function () {
+  onHide: function () {
 
-	},
+  },
 
 	/**
 	 * 生命周期函数--监听页面卸载
 	 */
-	onUnload: function () {
+  onUnload: function () {
 
-	},
+  },
 
 	/**
 	 * 页面相关事件处理函数--监听用户下拉动作
 	 */
-	onPullDownRefresh: function () {
+  onPullDownRefresh: function () {
 
-	},
+  },
 
 	/**
 	 * 页面上拉触底事件的处理函数
 	 */
-	onReachBottom: function () {
+  onReachBottom: function () {
 
-	},
+  },
 
 	/**
 	 * 用户点击右上角分享
 	 */
-	onShareAppMessage: function () {
+  onShareAppMessage: function () {
 
-	}
+  }
 })

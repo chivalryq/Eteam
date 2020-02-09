@@ -1,15 +1,10 @@
 <!--pages/personDetail/personDetail.wxml-->
-<cu-custom class="topback" isBack="{{true}}">
+<cu-custom class="topback" bgColor="bg-gradual-green" isBack="{{true}}">
 	<view slot="backText">返回</view>
 	<view slot="content">个人管理</view>
 </cu-custom>
 
-<scroll-view scroll-y class="scrollPage">
-  <view class="UCenter-bg">
-	<image class="avatar" src='{{userInfo.avatarUrl}}'></image>
-  <view class="nickname" style="font-size:15px">{{userInfo.nickName}}</view>
-    <image src="https://image.weilanwl.com/gif/wave.gif" mode="scaleToFill" class="gif-wave"></image>
-  </view>
+<form bindsubmit='submit'>
   <view class="cu-form-group margin-top">
     <view class="title">姓名</view>
     <input class="input" name='name' value='{{name}}' maxlength="80"></input>
@@ -144,11 +139,11 @@
 
 <view class="cu-form-group margin-top">
   <view class="title">自我介绍</view>
-    <textarea name='resume' data-placeholder='{{exresume}}' maxlength="1024"  placeholder-class="placeholder" class="{{textareaAValue?'value':'exresume'}}" bindinput="textareaAInput"></textarea>
+  <textarea name='exresume' value='{{exresume}}' maxlength="1024"  placeholder-class="placeholder" class="{{textareaAValue==null?'value':''}}" bindinput="textareaAInput"></textarea>
 </view> 
 
 
 <view class="padding flex flex-direction">
 <button class='cu-btn bg-orange margin-tb-sm lg' form-type='submit'>修改</button>
 </view>
-</scroll-view>
+</form>
