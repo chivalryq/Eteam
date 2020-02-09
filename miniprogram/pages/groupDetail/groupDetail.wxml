@@ -20,7 +20,7 @@
 	<view class="action margin-tb"><text class="icon-title text-green "></text>项目信息</view>
  <view class="cu-form-group margin-top">
     <view class="title">项目名称</view>
-    <input value='{{projectName}}' name='{{projectName}}'></input>
+    <input value='{{projectName}}' name='projectName'></input>
   </view>
   <view class="cu-form-group">
     <view class="title">目标比赛</view>
