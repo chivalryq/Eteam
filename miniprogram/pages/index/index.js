@@ -40,7 +40,8 @@ Page({
 			name: '发布队伍',
 			nav:"addGroup"
 		}],
-		isCard:false
+		isCard:false,
+    name:''
   },
   
 	getUserInfo: function (e) {
