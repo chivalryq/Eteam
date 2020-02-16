@@ -47,13 +47,13 @@ Page({
       data: {
         'id':this.data.id,
         'openid': app.globalData.openid,
-        'manager_name':this.data.name,
+        'manager_name': e.detail.value.name,
         'major': e.detail.value.major,
         'target': e.detail.value.target,
         'need': (e.detail.value.needPost).join('-'),
-        'progress': this.data.progress,
-        'resume': this.data.introduce,
-        'team_name': this.data.projectName
+        'progress': e.detail.value.progress,
+        'resume': e.detail.value.introduce,
+        'team_name': e.detail.value.projectName
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -65,6 +65,7 @@ Page({
         if (res.statusCode == 200) {
           console.log("上传成功")
           console.log(res)
+          wx.hideLoading()
         } else {
           console.log('上传失败')
         }
