@@ -6,7 +6,9 @@ Page({
 	 * 页面的初始数据
 	 */
 	data: {
-    imagesList:[],
+    id:'',
+    imgArrs:[],
+    idArrs:[],
     name:'',
 		major: [
       { id: '0001', value: "软件学院" }, { id: '0010', value: "信通学院" }, { id: '0011', value: "电子工程学院" }, { id: '0100', value: "计算机学院" }, { id: '0101', value: "自动化学院" }, { id: '0110', value: "经济管理学院" }, { id: '0111', value: "理学院" }, { id: '1000', value: "人文学院" }, { id: '1001', value: "媒体与设计艺术学院" }, { id: '1010', value: "现代邮政学院" }, { id: '1011', value: "网络空间安全学院" }, { id: '1100', value: "光电信息学院" }, { id: '1101', value:"国际学院"}
@@ -38,6 +40,7 @@ Page({
     wx.request({
       url: 'https://www.chival.xyz/create_team',
       data:{
+        
         'openid':app.globalData.openid,
         'manager_name':e.detail.value.name,
         'major':e.detail.value.major,
@@ -46,16 +49,33 @@ Page({
         'progress':e.detail.value.progress,
         'resume':e.detail.value.introduce,
         'team_name':e.detail.value.projectName
-        //'img_url': 
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
-
 
       },
       method:'POST',
       success(res)
       {
+        that.setData({
+          id:res.data.team_id
+        })
+        for(var i=0;i<that.data.imgArrs.length;i++){
+        wx.uploadFile({
+          url: 'https://www.chival.xyz/team/upload',
+          filePath: that.data.imgArrs[i],
+          name: 'photo',
+          header: { "Content-Type": "multipart/form-data" },
+          formData:{
+            'team_id':that.data.id
+          },
+          success: function (res) {
+              console.log(res)
+          }
+        })
+        }
+        wx.hideLoading()
+        console.log(res)
         if(res.statusCode==200){
           console.log("上传成功")
         }else{
@@ -63,58 +83,18 @@ Page({
         }
       }
     })
-    //循环传多张图片
-    for(var i=0;i<that.data.imagesList.length;i++){
-    wx.uploadFile({
-      url: 'https://www.chival.xyz/somepage',
-      filePath: that.data.imagesList[i],//这里是图片临时文件路径
-      name: 'some_key',
-      success(){
-
-      },
-      fail(){
-
-      },
-      complete(){
-
-      }
-    
-    })
-    }
-		//var imgList=this.data.imgList
-		//var img_url_ok=[]
-		//var flag=true
-		/*wx.cloud.init()
-		for (let i = 0; i < imgList.length; i++) {
-				var str = imgList[i];
-				var obj = str.lastIndexOf("/");
-				var fileName = str.substr(obj + 1)
-				console.log(fileName)
-				wx.cloud.uploadFile({
-					cloudPath: 'post_images/' + fileName,//必须指定文件名，否则返回的文件id不对
-					filePath: imgList[i], // 小程序临时文件路径
-					success: res => {
-						// get resource ID: 
-						console.log(res)
-						//把上传成功的图片的地址放入数组中
-						img_url_ok.push(res.fileID)
-						//如果全部传完，则可以将图片路径保存到数据库
-						if (img_url_ok.length == imgList.length) {
-							console.log("成功上传所有图片")
-							console.log(img_url_ok)
-							that.publish(img_url_ok) 
-							flag=false
-						}
-					},
-					fail: err => {
-						// handle error
-						console.log('fail: ' + err.errMsg)
-					}
-				})
-		} */
-	
-	
 	},
+  // 图片预览
+  previewImage(e) {
+    console.log(e)
+    let that = this
+    wx.previewImage({
+      urls: that.data.imagesList,
+      current: e.target.dataset.item,
+    })
+  },
+
+  
 	textareaAInput: function (e) {
 
 		this.setData({
@@ -144,7 +124,7 @@ Page({
 
   uploader: function () {
     var that = this;
-    let imagesList = [];
+    let imgArrs = [];
     let maxSize = 1024 * 1024;
     let maxLength = 9;
     let flag = true;
@@ -184,8 +164,9 @@ Page({
         }
         if (flag == true && res.tempFiles.length <= maxLength) {
           that.setData({
-            imagesList: res.tempFilePaths
+            imgArrs: res.tempFilePaths
           })
+          console.log(that.data.imgArrs)
         }
         console.log(res);
       },
@@ -194,17 +175,6 @@ Page({
       }
     })
   },
-  
-  //previewImage: function (e) {
-    //var current = e.target.dataset.src
-
-    //wx.previewImage({
-
-      //current: current,
-      //urls: this.data.imageList
-    //})
-  //},
-
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
