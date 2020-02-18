@@ -28,10 +28,10 @@
   </view>
 
   <view class="cu-form-group margin-top">擅长的技能
-    <view class="text-content">{{postString}}</view>
+    <view class="text-content">{{postString==''?'无':postString}}</view>
   </view>
 
-  	<view class="action margin-tb"><text class="icon-title text-green "></text>图片</view>
+  	<view class="action margin-tb" wx:if='{{expost1==2 || expost2==3}}'><text class="icon-title text-green "></text>图片
    <view class="cu-form-group margin-top">
 <view class="weui-uploader">
  <view class="weui-uploader__bd">
@@ -46,10 +46,10 @@
  </view>
 </view>
 </view>
-
+</view>
 <view class="cu-form-group margin-top">
   <view class="title">自我介绍</view>
-    <view class="text-content">{{item.resume=='undefined'?'无':item.resume}}</view>
+    <view class="text-content">{{exresume=='undefined'?'无':exresume}}</view>
 </view> 
 
 

@@ -239,6 +239,36 @@ Page({
 			}
 		})
 	},
+  request: function (e) {
+    var that = this;
+    wx.request({
+      url: 'https://www.chival.xyz/get_people',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      data: {
+        'openid': app.globalData.openid
+      },
+      method: "GET",
+      success(res) {
+        if (res.statusCode == 200) {
+          console.log("请求成功")
+          console.log(res)
+          that.setData({
+            name: res.data.person.name
+          })
+          console.log(that.data.name)
+        }
+        else {
+          console.log('请求失败')
+        }
+        if(that.data.name==''){
+          wx.redirectTo({
+url:'../personDetail/personDetail'
+          })}
+      }
+    })
+  },
 	/**
 	 * 生命周期函数--监听页面加载
 	 */

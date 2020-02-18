@@ -6,7 +6,7 @@
 </cu-custom>
 
 <block wx:for="{{person}}" wx:key="unique">
-<view class="cu-item shadow-lg" bindtap='onItemClick' data-personid="{{item._id}}">
+<view class="cu-item shadow-lg" bindtap='onItemClick' data-personid="{{item.id}}">
 	<view class="cu-card dynamic {{isCard?'no-card':''}} ">
   <view class="cu-item shadow margin-tb-xs">
     <view class="cu-list menu-avatar">

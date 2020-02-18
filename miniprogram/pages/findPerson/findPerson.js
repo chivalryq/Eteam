@@ -74,7 +74,7 @@ Page({
   onItemClick: function (e) {
     console.log(e.currentTarget.dataset.personid)
     wx.navigateTo({
-      url: '../findPersonDetail/findPersonDetail?personid=' + e.currentTarget.dataset.id,
+      url: '../findPersonDetail/findPersonDetail?id=' + e.currentTarget.dataset.personid,
     })
   },
   

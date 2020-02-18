@@ -119,6 +119,7 @@ Page({
     ],
     imagesList: [],
     name: '',
+    id:'',
     exresume: '',
     exmajor: '',
     expost1: '',
@@ -136,6 +137,7 @@ Page({
       title: '请稍等',
     })
     console.log(e.detail.value)
+    console.log(this.data.id)
     this.setData({
       detail: e.detail.value
     })
@@ -263,7 +265,7 @@ Page({
   request: function (e) {
     var that = this
     wx.request({
-      url: 'https://www.chival.xyz/get_person',
+      url: 'https://www.chival.xyz/get_self',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
@@ -277,6 +279,7 @@ Page({
           console.log(res);
           that.setData({
             name: res.data.person.name,
+            id: res.data.person.id,
             exmajor: res.data.person.major,
             exresume: res.data.person.resume,
             excompetition:

@@ -47,6 +47,8 @@ Page({
 	 * 页面的初始数据
 	 */
   data: {
+    personid: '',
+    id: '',
     userInfo: {
       avatarUrl: "",//用户头像
       nickName: ""//用户昵称
@@ -121,9 +123,8 @@ Page({
     exsoftware: [],
     excompetition: '',
     textareaAValue: '',
-    personid:'',
     post:[],
-    postString:[]
+    postString:''
   },
 
   uploader: function () {
@@ -181,6 +182,7 @@ Page({
 
   request: function (e) {
     var that = this
+    console.log(that.data.id)
     wx.request({
       url: 'https://www.chival.xyz/get_person',
       header: {
@@ -188,8 +190,7 @@ Page({
       },
       method: "GET",
       data: {
-        'openid': app.globalData.openid,
-        'id': that.data.personid
+        'id': that.data.id
       },
       success(res) {
         if (res.statusCode == 200) {
@@ -209,22 +210,26 @@ Page({
               (res.data.person.art).split("-"),
             exsoftware: (res.data.person.software).split("-"),
           })
-          if (that.data.name == null) {
-            that.data.name = '无'
+          console.log(that.data)
+          if (that.data.exresume == null) {
+            that.data.exresume = '无'
           }
+          if (that.data.expost1 == 0 || that.data.expost1 == 1 || that.data.expost2 == 1 || that.data.expost2==2)
           for (var i = 0; i < that.data.extech.length; i++) {
             that.data.post.push(that.data.tech[that.data.extech[i]].value)
           }
+          if (that.data.expost1 == 2 || that.data.expost2==3){
           for (var i = 0; i < that.data.exart.length; i++) {
-            that.data.post.push(that.data.tech[that.data.exart[i]].value)
+            that.data.post.push(that.data.art[that.data.exart[i]].value)
           }
           for (var i = 0; i < that.data.exsoftware.length; i++) {
-            that.data.post.push(that.data.tech[that.data.exsoftware[i]].value)
-          }
+            that.data.post.push(that.data.software[that.data.exsoftware[i]].value)
+          }}
           console.log(that.data.post)
           that.setData({
             postString: that.data.post.join("，")
           })
+          
         }
         else {
           console.log('请求失败')
