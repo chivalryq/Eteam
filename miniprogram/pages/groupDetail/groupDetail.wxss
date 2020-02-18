@@ -1,1 +1,29 @@
 /* miniprogram/pages/groupDetail/groupDetail.wxss */
+.addImg {
+  width: 122rpx;
+	height: 122rpx; 
+}
+.imgArr image {
+  display: inline !important;
+  width: 100%;
+  height: 100%;
+}
+.imgArr view {
+  display: inline-block;
+  margin: 10rpx;
+}
+.img_item {
+    width: 122rpx;
+	height: 122rpx; 
+  border: 1rpx solid #e5e5e5;
+  position: relative;
+}
+.removeBtn{
+  position: absolute;
+  mix-blend-mode: inherit;
+  right: 0rem;
+  top: 0rem;
+  width: 50rpx;
+  height: 50rpx;
+}
+

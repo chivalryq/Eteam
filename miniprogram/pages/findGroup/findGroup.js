@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    imagesList: [],
+    imgArrs: [],
+    hideAddImg: '',
     major: [
       { id: '0001', value: "软件学院" }, { id: '0010', value: "信通学院" }, { id: '0011', value: "电子工程学院" }, { id: '0100', value: "计算机学院" }, { id: '0101', value: "自动化学院" }, { id: '0110', value: "经济管理学院" }, { id: '0111', value: "理学院" }, { id: '1000', value: "人文学院" }, { id: '1001', value: "媒体与设计艺术学院" }, { id: '1010', value: "现代邮政学院" }, { id: '1011', value: "网络空间安全学院" }, { id: '1100', value: "光电信息学院" }, { id: '1101', value: "国际学院" }
     ],
@@ -49,6 +50,15 @@ Page({
           console.log('请求失败')
         }
       }
+    })
+  },
+  // 图片预览
+  previewImage(e) {
+    console.log(e)
+    let that = this
+    wx.previewImage({
+      urls: that.data.imgArrs,
+      current: e.target.dataset.item,
     })
   },
   /**
