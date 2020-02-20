@@ -8,6 +8,9 @@ Page({
   data: {
     id:'',
     imgArrs: [],
+    initial_pic:[],
+    s_initial_pic:[],
+    delete_pic:[],
     hideAddImg:'',
     name: '',
     major: [
@@ -26,6 +29,31 @@ Page({
     nowContest:'',
     nowPost:[]
 
+  },
+  getArrEqual: function(arr1, arr2) {
+    var a=arr1;
+    var b=arr2;
+    let newArr = [];
+    for(let i = 0; i<b.length; i++) {
+  for (let j = 0; j < a.length; j++) {
+    if (a[j] === b[i]) {
+      newArr.push(a[j]);
+    }
+  }
+}
+return newArr;
+},
+  subset: function(arr1, arr2) {
+    var len = arr1.length;
+    var arr = [];
+
+    while (len--) {
+      if (arr2.indexOf(arr1[len]) < 0) {
+        arr.push(arr1[len]);
+      }
+    }
+
+    return arr;
   },
   submit: function (e) {
     var that = this
@@ -46,7 +74,7 @@ Page({
     wx.request({
       url: 'https://www.chival.xyz/update_team',
       data: {
-        'id':this.data.id,
+        'id':that.data.id,
         'openid': app.globalData.openid,
         'manager_name': e.detail.value.name,
         'major': e.detail.value.major,
@@ -54,7 +82,8 @@ Page({
         'need': (e.detail.value.needPost).join('-'),
         'progress': e.detail.value.progress,
         'resume': e.detail.value.introduce,
-        'team_name': e.detail.value.projectName
+        'team_name': e.detail.value.projectName,
+        'now_pic': JSON.stringify(that.data.imgArrs)
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -63,6 +92,7 @@ Page({
       },
       method: 'POST',
       success(res) {
+        console.log(that.data.imgArrs)
         for (var i = 0; i < that.data.imgArrs.length; i++) {
           wx.uploadFile({
             url: 'https://www.chival.xyz/team/upload',
@@ -217,6 +247,7 @@ Page({
             temp_url[i]="https://www.chival.xyz/pic/"+temp_url[i].img_url
           }
           console.log(temp_url)
+          var temp_url1 = res.data.team.img_url
           that.setData({
             name:res.data.team.manager_name,
             projectName:res.data.team.team_name,
@@ -225,7 +256,9 @@ Page({
             nowMajor:res.data.team.major,
             nowContest:res.data.team.target,
             nowPost: res.data.team.need.split("-"),
-            imgArrs:temp_url
+            imgArrs:temp_url,
+            initial_pic:temp_url,
+            initial_pic1:temp_url1,
           })
         console.log(that.data.img_url)
 
