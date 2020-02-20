@@ -110,8 +110,11 @@
  <view class='imgArr'>
           <view wx:for="{{imgArrs}}" wx:key='' class='img_item'>
               <image src='{{item}}' mode='widthFix' bindtap='previewImage' data-item="{{item}}"  />
+              <view class="removeBtn" bindtap="removeImg" data-index="{{bindIndex}}">
+                    <image src="/images/delete.png" mode="aspectFill"></image>
+                </view>
           </view>
-          <view class='addImg' bindtap='uploader'>
+          <view class='addImg' bindtap='uploader'  hidden="{{hideAddImg}}">
               <image  src='http://etc-app.oss-cn-beijing.aliyuncs.com/image_201905301537160389.png' mode='widthFix' />
           </view>
       </view>

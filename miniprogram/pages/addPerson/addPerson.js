@@ -53,6 +53,19 @@ Page({
       current: e.target.dataset.item,
     })
   },
+  removeImg: function (e) {
+    var that = this;
+    var index = e.currentTarget.dataset.index;
+    if (that.data.imgArrs.length <= 9) {
+      that.setData({
+        hideAddImg: false
+      })
+    }
+    that.data.imgArrs.splice(index, 1);
+    that.setData({
+      imgArrs: that.data.imgArrs,
+    })
+  },
   textareaAInput: function (e) {
 
     this.setData({
@@ -138,7 +151,9 @@ Page({
       { name: '3', value: 'Pr' },
       { name: '4', value: 'Ai' },
     ],
-		imgList:[],
+    imgArrs: [],
+    hideAddImg: '',
+    id:'',
     textareaAValue:'',
     resume:'',
 		detail:{},
@@ -187,11 +202,34 @@ Page({
       header: {
         'content-type': 'application/x-www-form-urlencoded' 
       },
-      success :function(res) {
-          console.log("上传成功")
+        success(res)
+        {
+          that.setData({
+            id: res.data.id
+          })
+          console.log(that.data.imgArrs)
+          for (var i = 0; i < that.data.imgArrs.length; i++) {
+            wx.uploadFile({
+              url: 'https://www.chival.xyz/person/upload',
+              filePath: that.data.imgArrs[i],
+              name: 'photo',
+              header: { "Content-Type": "multipart/form-data" },
+              formData: {
+                'person_id': that.data.id
+              },
+              success: function (res) {
+                console.log(res)
+              }
+            })
+          }
+          wx.hideLoading()
           console.log(res)
-        console.log(app.globalData.openid)
-      }
+          if (res.statusCode == 200) {
+            console.log("上传成功")
+          } else {
+            console.log('上传失败')
+          }
+        }
     })
   },
  
@@ -234,7 +272,7 @@ url:'../personDetail/personDetail'
   },
   uploader: function () {
     var that = this;
-    let imgArrs = [];
+    //let imgArrs = [];
     let maxSize = 1024 * 1024;
     let maxLength = 9;
     let flag = true;
@@ -274,8 +312,13 @@ url:'../personDetail/personDetail'
         }
         if (flag == true && res.tempFiles.length <= maxLength) {
           that.setData({
-            imgArrs: res.tempFilePaths
+            imgArrs: that.data.imgArrs.concat(res.tempFilePaths)
           })
+          if (that.data.imgArrs.length >= maxLength) {
+            that.setData({
+              hideAddImg: true
+            })
+          }
           console.log(that.data.imgArrs)
         }
         console.log(res);

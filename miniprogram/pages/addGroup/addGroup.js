@@ -8,7 +8,7 @@ Page({
 	data: {
     id:'',
     imgArrs:[],
-    idArrs:[],
+    hideAddImg: '',
     name:'',
 		major: [
       { id: '0001', value: "软件学院" }, { id: '0010', value: "信通学院" }, { id: '0011', value: "电子工程学院" }, { id: '0100', value: "计算机学院" }, { id: '0101', value: "自动化学院" }, { id: '0110', value: "经济管理学院" }, { id: '0111', value: "理学院" }, { id: '1000', value: "人文学院" }, { id: '1001', value: "媒体与设计艺术学院" }, { id: '1010', value: "现代邮政学院" }, { id: '1011', value: "网络空间安全学院" }, { id: '1100', value: "光电信息学院" }, { id: '1101', value:"国际学院"}
@@ -60,6 +60,7 @@ Page({
         that.setData({
           id:res.data.team_id
         })
+        console.log(that.data.imgArrs)
         for(var i=0;i<that.data.imgArrs.length;i++){
         wx.uploadFile({
           url: 'https://www.chival.xyz/team/upload',
@@ -89,8 +90,22 @@ Page({
     console.log(e)
     let that = this
     wx.previewImage({
-      urls: that.data.imagesList,
+      urls: that.data.imgArrs,
       current: e.target.dataset.item,
+    })
+  },
+  removeImg: function (e) {
+    var that = this;
+    var index = e.currentTarget.dataset.index;
+    if (that.data.imgArrs.length <= 9) {
+      that.setData({
+        hideAddImg: false
+      })
+    }
+
+    that.data.imgArrs.splice(index, 1);
+    that.setData({
+      imgArrs: that.data.imgArrs,
     })
   },
 
@@ -124,7 +139,7 @@ Page({
 
   uploader: function () {
     var that = this;
-    let imgArrs = [];
+    //let imgArrs = [];
     let maxSize = 1024 * 1024;
     let maxLength = 9;
     let flag = true;
@@ -164,8 +179,13 @@ Page({
         }
         if (flag == true && res.tempFiles.length <= maxLength) {
           that.setData({
-            imgArrs: res.tempFilePaths
+            imgArrs: that.data.imgArrs.concat(res.tempFilePaths)
           })
+          if (that.data.imgArrs.length >= maxLength) {
+            that.setData({
+              hideAddImg: true
+            })
+          }
           console.log(that.data.imgArrs)
         }
         console.log(res);
