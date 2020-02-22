@@ -7,7 +7,8 @@ Page({
 	 */
 	data: {
 		pageindex:0,
-    imagesList: [],
+    imgArrs: [],
+    hideAddImg: '',
     major: [
       { name: '0', value: '软件学院' },
       { name: '1', value: '信通学院' },
@@ -67,7 +68,6 @@ Page({
       { name: '3', value: 'Pr' },
       { name: '4', value: 'Ai' },
     ],
-    imagesList: [],
     person:[{},{},{}]
 	},
 
@@ -102,6 +102,15 @@ Page({
           console.log('请求失败')
         }
       }
+    })
+  },
+  // 图片预览
+  previewImage(e) {
+    console.log(e)
+    let that = this
+    wx.previewImage({
+      urls: that.data.imgArrs,
+      current: e.target.dataset.item,
     })
   },
 	/**

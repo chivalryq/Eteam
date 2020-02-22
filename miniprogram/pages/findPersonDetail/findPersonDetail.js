@@ -112,7 +112,7 @@ Page({
       { name: '3', value: 'Pr' },
       { name: '4', value: 'Ai' },
     ],
-    imagesList: [],
+    imgArrs: [],
     name: '',
     exresume: '',
     exmajor: '',
@@ -196,6 +196,10 @@ Page({
         if (res.statusCode == 200) {
           console.log("请求成功")
           console.log(res);
+          var temp_url = res.data.person.img_url
+          for (var i = 0; i < temp_url.length; i++) {
+            temp_url[i] = "https://www.chival.xyz/pic/" + temp_url[i].img_url
+          }
           that.setData({
             name: res.data.person.name,
             exmajor: res.data.person.major,
@@ -209,6 +213,7 @@ Page({
             exart:
               (res.data.person.art).split("-"),
             exsoftware: (res.data.person.software).split("-"),
+            imgArrs: temp_url,
           })
           console.log(that.data)
           if (that.data.exresume == null) {
@@ -237,11 +242,26 @@ Page({
       }
     })
   },
-
+  // 图片预览
+  previewImage(e) {
+    console.log(e)
+    let that = this
+    wx.previewImage({
+      urls: that.data.imgArrs,
+      current: e.target.dataset.item,
+    })
+  },
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
   onLoad: function (options) {
+    this.setData({
+      id: options.id
+    })
+    console.log(this.data.id)
+    wx.showLoading({
+      title: '请稍后',
+    })
     this.request();
 
     //	console.log(this.data.personid)

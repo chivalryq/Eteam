@@ -117,7 +117,12 @@ Page({
       { name: '3', value: 'Pr' },
       { name: '4', value: 'Ai' },
     ],
-    imagesList: [],
+    imgArrs: [],
+    initial_pic: [],
+    s_initial_pic: [],
+    delete_pic: [],
+    hideAddImg: '',
+    imagesList:[],
     name: '',
     id:'',
     exresume: '',
@@ -130,6 +135,29 @@ Page({
     excompetition:'',
     textareaAValue: '',
 	},
+  getArrEqual: function (arr1, arr2) {
+    var a = arr1;
+    var b = arr2;
+    let newArr = [];
+    for (let i = 0; i < b.length; i++) {
+      for (let j = 0; j < a.length; j++) {
+        if (a[j] === b[i]) {
+          newArr.push(a[j]);
+        }
+      }
+    }
+    return newArr;
+  },
+  subset: function (arr1, arr2) {
+    var len = arr1.length;
+    var arr = [];
+    while (len--) {
+      if (arr2.indexOf(arr1[len]) < 0) {
+        arr.push(arr1[len]);
+      }
+    }
+    return arr;
+  },
 
   submit: function (e) {
     var that = this;
@@ -181,13 +209,34 @@ Page({
         'tech': this.data.extech.join('-'),
         'art': this.data.exart.join('-'),
         'software': this.data.exsoftware.join('-'),
+        'now_pic': JSON.stringify(that.data.imgArrs)
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      success: function (res) {
-        console.log("上传成功")
-        console.log(res)
+      success(res) {
+        console.log(that.data.imgArrs)
+        for (var i = 0; i < that.data.imgArrs.length; i++) {
+          wx.uploadFile({
+            url: 'https://www.chival.xyz/person/upload',
+            filePath: that.data.imgArrs[i],
+            name: 'photo',
+            header: { "Content-Type": "multipart/form-data" },
+            formData: {
+              'person_id': that.data.id
+            },
+            success: function (res) {
+              console.log(res)
+            }
+          })
+        }
+        if (res.statusCode == 200) {
+          console.log("上传成功")
+          console.log(res)
+          wx.hideLoading()
+        } else {
+          console.log('上传失败')
+        }
       }
     })
     for (var i = 0; i < that.data.imagesList.length; i++) {
@@ -207,6 +256,28 @@ Page({
 
       })
     }
+  },
+  previewImage(e) {
+    console.log(e)
+    let that = this
+    wx.previewImage({
+      urls: that.data.imgArrs,
+      current: e.target.dataset.item,
+    })
+  },
+  removeImg: function (e) {
+    var that = this;
+    var index = e.currentTarget.dataset.index;
+    if (that.data.imgArrs.length <= 9) {
+      that.setData({
+        hideAddImg: false
+      })
+    }
+
+    that.data.imgArrs.splice(index, 1);
+    that.setData({
+      imgArrs: that.data.imgArrs,
+    })
   },
 
   uploader: function () {
@@ -250,8 +321,14 @@ Page({
           })
         }
         if (flag == true && res.tempFiles.length <= maxLength) {
+
           that.setData({
-            imagesList: res.tempFilePaths
+            imgArrs: that.data.imgArrs.concat(res.tempFilePaths)
+          })
+        }
+        if (that.data.imgArrs.length >= maxLength) {
+          that.setData({
+            hideAddImg: true
           })
         }
         console.log(res);
@@ -277,6 +354,12 @@ Page({
         if (res.statusCode == 200) {
           console.log("请求成功")
           console.log(res);
+          var temp_url = res.data.person.img_url
+          for (var i = 0; i < temp_url.length; i++) {
+            temp_url[i] = "https://www.chival.xyz/pic/" + temp_url[i].img_url
+          }
+          console.log(temp_url)
+          var temp_url1 = res.data.person.img_url
           that.setData({
             name: res.data.person.name,
             id: res.data.person.id,
@@ -291,7 +374,11 @@ Page({
             exart: 
               (res.data.person.art).split("-"),
             exsoftware: (res.data.person.software).split("-"),
+            imgArrs: temp_url,
+            initial_pic: temp_url,
+            initial_pic1: temp_url1,
         })
+          console.log(that.data.img_url)
           if (that.data.exresume == "undefined") {
             that.data.exresume = '无'
           }
