@@ -104,28 +104,21 @@
 		</checkbox-group>
   </view>
   </view>
-	<view class="cu-bar bg-white margin-top margin-left margin-right">
-	
-    <view class="action">
-       <text class="icon-title text-orange "></text>作品展示
-    </view>
-    <view class="action">
-      {{imgList.length}}/4
-</view>
-    </view>
 
-  <view class="cu-form-group margin-left margin-right">
-    <view class="grid col-4 grid-square flex-sub">
-      <view class="padding-xs bg-img" style="background-image:url({{imgList[index]}})" wx:for="{{imgList}}" wx:key="{{index}}" bindtap="ViewImage" data-url="{{imgList[index]}}">
-        <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
-          <text class="icon-close"></text>
-        </view>
+  	<view class="action margin-tb"><text class="icon-title text-green "></text>作品展示</view>
+   <view class="cu-form-group margin-top">
+ <view class='imgArr'>
+          <view wx:for="{{imgArrs}}" wx:key='' class='img_item'>
+              <image src='{{item}}' mode='widthFix' bindtap='previewImage' data-item="{{item}}"  />
+              <view class="removeBtn" bindtap="removeImg" data-index="{{bindIndex}}">
+                    <image src="/images/delete.png" mode="aspectFill"></image>
+                </view>
+          </view>
+          <view class='addImg' bindtap='uploader'  hidden="{{hideAddImg}}">
+              <image  src='http://etc-app.oss-cn-beijing.aliyuncs.com/image_201905301537160389.png' mode='widthFix' />
+          </view>
       </view>
-      <view class="padding-xs solids" bindtap="ChooseImage" wx:if="{{imgList.length<4}}">
-        <text class="icon-cameraadd"></text>
-      </view>
-    </view>
-  </view>
+</view>
 </block>
 
 <view class="cu-form-group margin-top">

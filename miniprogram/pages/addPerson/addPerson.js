@@ -45,6 +45,27 @@ Page({
       softwareIndex: e.detail.value
     })
   },
+  previewImage(e) {
+    console.log(e)
+    let that = this
+    wx.previewImage({
+      urls: that.data.imagesList,
+      current: e.target.dataset.item,
+    })
+  },
+  removeImg: function (e) {
+    var that = this;
+    var index = e.currentTarget.dataset.index;
+    if (that.data.imgArrs.length <= 9) {
+      that.setData({
+        hideAddImg: false
+      })
+    }
+    that.data.imgArrs.splice(index, 1);
+    that.setData({
+      imgArrs: that.data.imgArrs,
+    })
+  },
   textareaAInput: function (e) {
 
     this.setData({
@@ -130,7 +151,9 @@ Page({
       { name: '3', value: 'Pr' },
       { name: '4', value: 'Ai' },
     ],
-		imgList:[],
+    imgArrs: [],
+    hideAddImg: '',
+    id:'',
     textareaAValue:'',
     resume:'',
 		detail:{},
@@ -179,11 +202,34 @@ Page({
       header: {
         'content-type': 'application/x-www-form-urlencoded' 
       },
-      success :function(res) {
-          console.log("上传成功")
+        success(res)
+        {
+          that.setData({
+            id: res.data.id
+          })
+          console.log(that.data.imgArrs)
+          for (var i = 0; i < that.data.imgArrs.length; i++) {
+            wx.uploadFile({
+              url: 'https://www.chival.xyz/person/upload',
+              filePath: that.data.imgArrs[i],
+              name: 'photo',
+              header: { "Content-Type": "multipart/form-data" },
+              formData: {
+                'person_id': that.data.id
+              },
+              success: function (res) {
+                console.log(res)
+              }
+            })
+          }
+          wx.hideLoading()
           console.log(res)
-        console.log(app.globalData.openid)
-      }
+          if (res.statusCode == 200) {
+            console.log("上传成功")
+          } else {
+            console.log('上传失败')
+          }
+        }
     })
   },
  
@@ -193,51 +239,6 @@ Page({
 				textareaAValue: e.detail.value
 			})
 		
-	},
-	ChooseImage:function() {
-		wx.chooseImage({
-			count: 4, //默认9
-			sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-			sourceType: ['album'], //从相册选择
-			success: (res) => {
-				if (this.data.imgList.length != 0) {
-					this.setData({
-						imgList: this.data.imgList.concat(res.tempFilePaths)
-					})
-				} else {
-					this.setData({
-						imgList: res.tempFilePaths
-					})
-				}
-			}
-		});
-	},
-  textareaAInput: function (e) {
-
-    this.setData({
-      textareaAValue: e.detail.value
-    })},
-	ViewImage(e) {
-		wx.previewImage({
-			urls: this.data.imgList,
-			current: e.currentTarget.dataset.url
-		});
-	},
-	DelImg(e) {
-		wx.showModal({
-			title: '召唤师',
-			content: '确定要删除这段回忆吗？',
-			cancelText: '再看看',
-			confirmText: '再见',
-			success: res => {
-				if (res.confirm) {
-					this.data.imgList.splice(e.currentTarget.dataset.index, 1);
-					this.setData({
-						imgList: this.data.imgList
-					})
-				}
-			}
-		})
 	},
   request: function (e) {
     var that = this;
@@ -266,6 +267,64 @@ Page({
           wx.redirectTo({
 url:'../personDetail/personDetail'
           })}
+      }
+    })
+  },
+  uploader: function () {
+    var that = this;
+    //let imgArrs = [];
+    let maxSize = 1024 * 1024;
+    let maxLength = 9;
+    let flag = true;
+    wx.chooseImage({
+      count: 9, //最多可以选择的图片总数
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+
+        for (let i = 0; i < res.tempFiles.length; i++) {
+          if (res.tempFiles[i].size > maxSize) {
+            flag = false;
+            console.log(111)
+            wx.showModal({
+              content: '图片太大，不允许上传',
+              showCancel: false,
+              success: function (res) {
+                if (res.confirm) {
+                  console.log('用户点击确定')
+                }
+              }
+            });
+
+          }
+        }
+        if (res.tempFiles.length > maxLength) {
+          console.log('222');
+          wx.showModal({
+            content: '最多能上传' + maxLength + '张图片',
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {
+                console.log('确定');
+              }
+            }
+          })
+        }
+        if (flag == true && res.tempFiles.length <= maxLength) {
+          that.setData({
+            imgArrs: that.data.imgArrs.concat(res.tempFilePaths)
+          })
+          if (that.data.imgArrs.length >= maxLength) {
+            that.setData({
+              hideAddImg: true
+            })
+          }
+          console.log(that.data.imgArrs)
+        }
+        console.log(res);
+      },
+      fail: function (res) {
+        console.log(res);
       }
     })
   },
