@@ -27,6 +27,13 @@ Page({
     softwareList: [{ id: '001', value: 'Ps' }, { id: '010', value: 'Ae' }, { id: '011', value: 'SAI' }, { id: '100', value: 'Pr' }, { id: '101', value:'Ai'}],
 
 	},
+
+goindex:function(){
+  wx.navigateBack({
+    delta:1
+  })
+},
+
 	submit:function(e){
 		var that = this 
 		wx.showLoading({
@@ -40,7 +47,6 @@ Page({
     wx.request({
       url: 'https://www.chival.xyz/create_team',
       data:{
-        
         'openid':app.globalData.openid,
         'manager_name':e.detail.value.name,
         'major':e.detail.value.major,
@@ -61,6 +67,9 @@ Page({
           id:res.data.team_id
         })
         console.log(that.data.imgArrs)
+        if(that.data.imgArrs.length==0){
+          that.goindex()
+        }
         for(var i=0;i<that.data.imgArrs.length;i++){
         wx.uploadFile({
           url: 'https://www.chival.xyz/team/upload',
@@ -72,6 +81,7 @@ Page({
           },
           success: function (res) {
               console.log(res)
+              that.goindex()
           }
         })
         }

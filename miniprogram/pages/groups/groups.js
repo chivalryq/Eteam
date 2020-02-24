@@ -24,6 +24,11 @@ Page({
       url: '../groupDetail/groupDetail?id='+ id,
     })
   },
+  gopersoncenter:function(){
+    wx.navigateTo({
+      url:'../personcenter/personcenter'
+    })
+  },
 
   request: function (e) {
     var that = this
@@ -42,6 +47,14 @@ Page({
         if (res.statusCode == 200) {
           console.log("请求成功")
           console.log(res)
+          if(res.data.team==null){
+              wx.showToast({
+                icon:'none',
+                title: '你没有创建过队伍',
+                duration:'2000'
+              })
+              that.gopersoncenter()
+          }
           that.setData({
             teams:res.data.teams
           })
