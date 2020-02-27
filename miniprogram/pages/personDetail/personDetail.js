@@ -135,6 +135,11 @@ Page({
     excompetition:'',
     textareaAValue: '',
 	},
+  gopersoncenter: function () {
+    wx.navigateTo({
+      url: '../personcenter/personcenter'
+    })
+  },
   getArrEqual: function (arr1, arr2) {
     var a = arr1;
     var b = arr2;
@@ -227,6 +232,7 @@ Page({
             },
             success: function (res) {
               console.log(res)
+              that.gopersoncenter()
             }
           })
         }
