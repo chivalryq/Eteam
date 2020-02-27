@@ -162,6 +162,12 @@ Page({
     addsoftware: []
 	},
 
+  goindex: function () {
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+
   submit:function(e){
     var that = this;
     wx.showLoading({
@@ -208,6 +214,9 @@ Page({
             id: res.data.id
           })
           console.log(that.data.imgArrs)
+          if (that.data.imgArrs.length == 0) {
+            that.goindex()
+          }
           for (var i = 0; i < that.data.imgArrs.length; i++) {
             wx.uploadFile({
               url: 'https://www.chival.xyz/person/upload',
@@ -219,6 +228,7 @@ Page({
               },
               success: function (res) {
                 console.log(res)
+                that.goindex()
               }
             })
           }
