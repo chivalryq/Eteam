@@ -14,6 +14,7 @@ Page({
     takeSession: false,
     requestResult: '',
 		gridCol:2,
+    team:[{},{}],
 		iconList: [{
 			icon: 'cardboardfill',
 			color: 'red',
@@ -42,6 +43,33 @@ Page({
 		}],
 		isCard:false,
     name:''
+  },
+
+  request: function (e) {
+    var that = this
+    wx.request({
+      url: 'https://www.chival.xyz/random_teams',
+      data: {
+        'openid': app.globalData.openid,
+        'id': that.data.id
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: 'GET',
+      success(res) {
+        if (res.statusCode == 200) {
+          console.log("请求成功")
+          console.log(res)
+          that.setData({
+            teams: res.data.teams
+          })
+          console.log(that.data.teams)
+        } else {
+          console.log('请求失败')
+        }
+      }
+    })
   },
   
 	getUserInfo: function (e) {

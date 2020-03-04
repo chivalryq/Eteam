@@ -55,6 +55,12 @@ Page({
               })
               that.gopersoncenter()
           }
+          for (var j = 0; j < res.data.teams.length; j++) {
+            var temp_url = res.data.teams[j].img_url
+            for (var i = 0; i < temp_url.length; i++) {
+              temp_url[i] = "https://www.chival.xyz/pic/" + temp_url[i].img_url
+            }
+          }
           that.setData({
             teams:res.data.teams
           })
