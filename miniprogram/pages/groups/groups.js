@@ -18,6 +18,11 @@ Page({
     ],
    teams:[{},{}]
   },
+  goaddGroup: function () {
+    wx.navigateTo({
+      url: '../addGroup/addGroup',
+    })
+  },
   gogroupDetail: function (e) {
     var id=e.currentTarget.dataset.teamid;
     wx.navigateTo({
