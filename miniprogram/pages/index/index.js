@@ -32,8 +32,8 @@ Page({
 			icon: 'friendfamous',
 			color: 'orange',
 			badge: 0,
-			name: '毛遂自荐',
-			nav:"addPerson"
+			name: '个人中心',
+			nav:"personcenter"
 		}, {
 			icon: 'friend',
 			color: 'green',
@@ -80,11 +80,18 @@ Page({
 			hasUserInfo: true
 		})
 	},
-navaddPerson:function(){
-wx.navigateTo({
+  navpersoncenter:function(){
+    wx.navigateTo({
+      url: '../personcenter/personcenter',
+    })
+  },
+  /*不用了
+  navaddPerson:function(){
+  wx.navigateTo({
 	url: '../addPerson/addPerson',
-})
-},
+  })
+} ,
+*/
 	navaddGroup: function () {
 		wx.navigateTo({
 			url: '../addGroup/addGroup',

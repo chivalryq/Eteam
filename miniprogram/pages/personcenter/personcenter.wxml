@@ -1,5 +1,5 @@
 <!--pages/personcenter/personcenter.wxml-->
-<cu-custom bgColor="bg-gradual-blue">
+<cu-custom class="topback" bgColor="bg-gradual-blue" isBack="{{true}}">
   <view slot="content">个人中心</view>
 </cu-custom>
 

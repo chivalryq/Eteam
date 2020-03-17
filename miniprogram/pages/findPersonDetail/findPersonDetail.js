@@ -14,7 +14,7 @@ Page({
     })
   },
   Post2Change: function (e) {
-    console.log(e);
+    console.log(e); 
     this.setData({
       post2Index: e.detail.value
     })
