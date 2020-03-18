@@ -3084,6 +3084,7 @@ scroll-view.cu-steps .cu-item {
 .padding {
   padding: 20rpx;
   border-radius: 35rpx;
+  margin: 10rpx;
 }
 
 .padding-lg {
