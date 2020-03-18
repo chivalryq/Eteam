@@ -28,18 +28,20 @@ Page({
 				badge: 0,
 				name: '找队伍',
         nav:"findGroup"
-			}, {
+			}, 
+      {
 			icon: 'friendfamous',
 			color: 'orange',
 			badge: 0,
 			name: '个人中心',
 			nav:"personcenter"
-		}, {
+		}, 
+    {
 			icon: 'friend',
 			color: 'green',
 			badge: 0,
 			name: '发布队伍',
-			nav:"addGroup"
+			nav:"Groups"
 		}],
 		isCard:false,
     name:''
@@ -92,9 +94,9 @@ Page({
   })
 } ,
 */
-	navaddGroup: function () {
+	navGroups: function () {
 		wx.navigateTo({
-			url: '../addGroup/addGroup',
+			url: '../groups/groups',
 		})
 	},
 	navfindPerson:function(){

@@ -1,7 +1,7 @@
 <!--miniprogram/pages/groups/groups.wxml-->
 <cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
 	<view slot="backText">返回</view>
-	<view slot="content">发起组队</view>
+	<view slot="content">发布队伍</view>
 </cu-custom>
 <view class="padding solid-bottom margin-top">
 <view class="flex solid-bottom padding justify-between align-center">
@@ -10,15 +10,15 @@
   </view>
 </view>
 <block wx:for="{{teams}}" wx:key="" wx:for-index="idx">
-	<view class="cu-card case {{isCard?'no-card':''}} "  bindtap="gogroupDetail" data-teamid="{{item.id}}">
+	<view class="cu-card case {{isCard?'no-card':''}} "  >
   <view class="cu-item  radius bg-white shadow-warp margin-tb-xs">
     <view class="cu-list menu-avatar">
       <view class="cu-item">
         <view class="content flex-sub">
           <view>{{item.team_name}}</view>
         </view>
-          <view class="flex padding align-center">
-        <image class="edit-pic" src="/images/编辑.png" mode="widthFix"></image>
+          <view class="flex padding align-center" bindtap="gogroupDetail" data-teamid="{{item.id}}">
+        <image class="edit-pic" src="/images/编辑.png" mode="widthFix" ></image>
           <view>编辑</view>
         </view>
       </view>

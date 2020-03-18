@@ -29,11 +29,6 @@ Page({
       url: '../groupDetail/groupDetail?id='+ id,
     })
   },
-  gopersoncenter:function(){
-    wx.navigateTo({
-      url:'../personcenter/personcenter'
-    })
-  },
 
   request: function (e) {
     var that = this
@@ -52,14 +47,6 @@ Page({
         if (res.statusCode == 200) {
           console.log("请求成功")
           console.log(res)
-          if(res.data.team==null){
-              wx.showToast({
-                icon:'none',
-                title: '你没有创建过队伍',
-                duration:'2000'
-              })
-              that.gopersoncenter()
-          }
           for (var j = 0; j < res.data.teams.length; j++) {
             var temp_url = res.data.teams[j].img_url
             for (var i = 0; i < temp_url.length; i++) {
