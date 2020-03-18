@@ -6,7 +6,7 @@
  <view class="cu-list grid no-border col-{{gridCol}} item bg-white">
     <view class="cu-item" wx:for="{{iconList}}"  style="display:flex" wx:key="unique" wx:if="{{index<gridCol*2}}">
       
-      <view class="adjust flex justify-center align-center">
+      <view class="adjust flex justify-center align-center" bindtap="nav{{item.nav}}">
       <view class="my-btn  radius shadow bg-white">
          <image src="../../images/{{item.name}}.png" mode="widthFix" class='widandhei'></image>
     
