@@ -1,0 +1,32 @@
+
+page{
+  height:90%
+}
+.my-btn{
+  width: 60%;
+  height: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.item{
+  height:100%
+}
+.widandhei{
+  width: 40%;
+  height: 40%;
+}
+.no-border{
+  border-right: 1px solid rgba(255, 255, 255, 0);
+  border-bottom: 1px solid rgba(255, 255, 255, 0);
+}
+.adjust{
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
