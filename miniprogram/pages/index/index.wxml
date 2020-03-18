@@ -3,16 +3,20 @@
   <view slot="content">Eteam</view>
 </cu-custom>
 
- <view class="cu-list grid col-{{gridCol}}">
-    <view class="cu-item" wx:for="{{iconList}}" wx:key wx:if="{{index<gridCol*2}}">
-      <view class="icon-{{item.icon}} text-{{item.color}}" bindtap='nav{{item.nav}}'>
-        <view class="cu-tag badge" wx:if="{{item.badge!=0}}">
-          <block wx:if="{{item.badge!=1}}">{{item.badge>99?"99+":item.badge}}</block>
-        </view>
-      </view>
+ <view class="cu-list grid no-border col-{{gridCol}} item bg-white">
+    <view class="cu-item" wx:for="{{iconList}}"  style="display:flex" wx:key="unique" wx:if="{{index<gridCol*2}}">
+      
+      <view class="adjust flex justify-center align-center" bindtap="nav{{item.nav}}">
+      <view class="my-btn  radius shadow bg-white">
+         <image src="../../images/{{item.name}}.png" mode="widthFix" class='widandhei'></image>
+    
       <text>{{item.name}}</text>
+      </view>
+     </view>
     </view>
   </view>
+
+
 <!--
 <view class="margin-xl padding-xl bg-white radius shadow-lg">
   <view class="flex justify-center">
@@ -26,7 +30,7 @@
  </view>
 </view>
 -->
-<block wx:for="{{teams}}" wx:key="" wx:for-index="idx">
+<block wx:for="{{teams}}" wx:key="unique" wx:for-index="idx">
 <view class="cu-item shadow-lg" bindtap="gogroupForShow" data-teamid="{{item.id}}">
 	<view class="cu-card dynamic {{isCard?'no-card':''}} ">
   <view class="cu-item shadow margin-tb-xs">
