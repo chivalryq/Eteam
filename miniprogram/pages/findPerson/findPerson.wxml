@@ -5,36 +5,43 @@
 	<view slot="content">找队友</view>
 </cu-custom>
 
+<scroll-view scroll-x class="bg-white nav">
+  <view class="flex text-center">
+    <view class="cu-item flex-sub {{index==tabChose?'text-chose':'text-nun'}}" wx:for="{{4}}" data-id="{{index}}">
+      {{tab[index]}}
+    </view>
+  </view>
+</scroll-view>
+
 <block wx:for="{{person}}"  wx:for-index="idx">
 <view class="cu-item shadow-lg" bindtap='onItemClick' data-personid="{{item.id}}">
-	<view class="cu-card dynamic {{isCard?'no-card':''}} ">
-  <view class="cu-item shadow margin-tb-xs">
+	<view class="cu-card dynamic {{isCard?'no-card':''}}">
+  <view class="cu-item-red padding radius shadow shadow-lg margin-tb-xs ">
     <view class="cu-list menu-avatar">
-      <view class="cu-item">
+      <view class="cu-item-red">
         <view class="cu-avatar round lg" style="background-image:url({{avatarUrl}});"></view>
-        <view class="content flex-sub">
-          <view>{{item.name}}</view>
-          <view class="text-gray text-sm flex justify-between">
+        <view class="content flex-sub title">
+          <view class="cuname">
+            {{item.name}}
+          </view>
+          <view class="cumajor">
             学院：{{major[item.major].value}}
           </view>
         </view>
       </view>
     </view>
+    <view class="detail shadow shadow-lg">
     <view class="text-content">
+    <view>
       意向：{{post1[item.post1].value}}、{{post2[item.post2].value}}
     </view>
-    <view class="text-content">
-      自我介绍：{{item.resume=='undefined'?'无':item.resume}}
+    <view>
+      自我介绍：{{item.resume=='undefined'?'无':item.resume}}</view>
     </view>
-    <view class="grid flex-sub padding-lr {{isCard?'col-3 grid-square':'col-1'}}">
-    <view class="imgArr">
-      <view wx:for="{{person[idx].img_url}}" wx:key=''>
-              <image src='{{item}}' mode='widthFix' data-item="{{item}}"  />
-             
-          </view>
-          </view>
+  </view>
+  <view class="cutap">
+      点击查看详情>
     </view>
-    
   </view>
   </view>
 	

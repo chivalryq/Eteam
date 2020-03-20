@@ -61,6 +61,7 @@ image {
   display: inline-block;
   position: relative;
   z-index: 0;
+  vertical-align:top; 
 }
 
 image.loading::before {
@@ -1179,7 +1180,7 @@ button.icon.lg {
 
 .cu-list.menu-avatar>.cu-item .content {
   position: absolute;
-  left: 146rpx;
+  left: 50rpx;
   width: calc(100% - 96rpx - 60rpx - 120rpx - 20rpx);
   line-height: 1.6em;
 }
@@ -2120,7 +2121,7 @@ button.icon.lg {
   display: block;
   background-color: #fff;
   overflow: hidden;
-  border-radius: 10rpx;
+  border-radius: 35rpx;
   margin: 30rpx;
 }
 
@@ -3081,7 +3082,9 @@ scroll-view.cu-steps .cu-item {
 }
 
 .padding {
-  padding: 30rpx;
+  padding: 20rpx;
+  border-radius: 35rpx;
+  margin: 10rpx;
 }
 
 .padding-lg {

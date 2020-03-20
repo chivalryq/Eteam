@@ -1,39 +1,28 @@
 <!--miniprogram/pages/groups/groups.wxml-->
-<cu-custom bgColor="bg-gradual-red" isBack="{{true}}">
+<cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
 	<view slot="backText">返回</view>
-	<view slot="content">队伍管理</view>
+	<view slot="content">发布队伍</view>
 </cu-custom>
+<view class="padding solid-bottom margin-top">
+<view class="flex solid-bottom padding justify-between align-center">
+  <view>我的队伍</view>
+  <image src='/images/添加.png' class="add" bindtap="goaddGroup"></image>
+  </view>
+</view>
 <block wx:for="{{teams}}" wx:key="" wx:for-index="idx">
-<view class="cu-item shadow-lg" bindtap="gogroupDetail" data-teamid="{{item.id}}">
-	<view class="cu-card dynamic {{isCard?'no-card':''}} ">
-  <view class="cu-item shadow margin-tb-xs">
+	<view class="cu-card case {{isCard?'no-card':''}} "  >
+  <view class="cu-item  radius bg-white shadow-warp margin-tb-xs">
     <view class="cu-list menu-avatar">
       <view class="cu-item">
-        <view class="cu-avatar round lg" style="background-image:url({{avatarUrl}});"></view>
         <view class="content flex-sub">
           <view>{{item.team_name}}</view>
-          <view class="text-gray text-sm flex justify-between">
-            负责人：{{item.manager_name}}
-          </view>
+        </view>
+          <view class="flex padding align-center" bindtap="gogroupDetail" data-teamid="{{item.id}}">
+        <image class="edit-pic" src="/images/编辑.png" mode="widthFix" ></image>
+          <view>编辑</view>
         </view>
       </view>
     </view>
-    <view class="text-content">
-            目标比赛：{{contest[item.target].value}}
-          </view>
-    <view class="text-content">
-      队伍介绍：{{item.resume}}
-    </view>
-    <view class="grid flex-sub padding-lr {{isCard?'col-3 grid-square':'col-1'}}">
-          <view class="imgArr">
-      <view wx:for="{{teams[idx].img_url}}" wx:key=''>
-              <image src='{{item}}' mode='widthFix' data-item="{{item}}"  />
-             
-          </view>
-          </view>
-    </view>
-
-  </view>
   </view>
 </view>
 </block>

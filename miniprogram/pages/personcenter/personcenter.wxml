@@ -1,15 +1,14 @@
 <!--pages/personcenter/personcenter.wxml-->
-<cu-custom bgColor="bg-gradual-blue">
+<cu-custom class="topback" bgColor="bg-gradual-orange" isBack="{{true}}">
   <view slot="content">个人中心</view>
 </cu-custom>
 
 <view class="top">
   <image class="avatar" src='{{userInfo.avatarUrl}}'></image>
-  <view class="nickname" style="font-size:15px">{{userInfo.nickName}}</view>
+  <view class="nickname" style="font-size:17px">{{userInfo.nickName}}</view>
 </view>
 
 <view class="container">
-
   <view class="item" bindtap='gopersonDetail'>
     <image class="itemtag" src="images/post.png"></image>
     <text>个人管理</text>

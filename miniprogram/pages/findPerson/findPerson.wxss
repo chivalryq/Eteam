@@ -1,1 +1,65 @@
 /* pages/findPerson/findPerson.wxss */
+.nav{
+  height: 110rpx;
+}
+.text-center{
+  margin-top:1ch;
+}
+.text-nun{
+  color:darksalmon;
+}
+.text-chose{
+  color:red;
+  font-weight:650;
+  font-size:x-large;
+}
+
+.cu-card>.cu-item-red {
+  display: block;
+  background-color: rgba(252, 121, 121, 0.993);
+  box-shadow:1px 2px 3px 1px rgba(163, 9, 9, 0.452);
+  color:white;
+  overflow: hidden;
+  border-radius: 70rpx;
+  margin: 30rpx;
+}
+.cu-list.menu-avatar>.cu-item-red>.cu-avatar {
+  width:130rpx;
+  height:130rpx;
+  position: absolute;
+  margin-left: 30rpx;
+  margin-top:-20rpx;
+}
+.title{
+  margin-left:190rpx;
+  margin-top:35rpx;
+  font-size:15px;
+}
+.cuname{
+  margin-left:10rpx;
+}
+.cumajor{
+  color:rgb(252, 241, 242);
+  font-size:10px;
+}
+.detail{
+  border-radius:10rpx;
+  margin-top:50rpx;
+  margin-left:40rpx;
+  font-size:12px;
+  background-color:rgb(240, 47, 95);
+  width:580rpx;
+  height:150rpx;
+  box-shadow:0px 1px 2px 0.5px rgba(68, 68, 68, 0.384);
+}
+.text-content{
+  margin-left:30rpx;
+}
+.cutap{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top:10rpx;
+  color:rgb(252, 241, 242);
+  font-size:10px;
+}

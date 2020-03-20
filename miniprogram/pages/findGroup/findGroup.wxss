@@ -1,1 +1,11 @@
 /* miniprogram/pages/findGroup/findGroup.wxss */
+.content-center{
+  text-align:center;
+}
+.content-left{
+  margin:30rpx;
+}
+.content-left1{
+  margin:30rpx;
+  text-decoration:underline;
+}

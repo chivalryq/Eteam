@@ -1,4 +1,7 @@
 /* pages/personcenter/personcenter.wxss */
+page{
+    background: rgb(247, 247, 247);
+}
 .top{
   height:100%;
   width:100%;
@@ -6,7 +9,6 @@
   justify-content: center;
   display: flex;
   flex-direction: column;
-  background-color: rgba(106, 168, 219, 0.637);
 }
 .container{
   margin-top: 20rpx;
@@ -16,8 +18,6 @@
 .item{
   width:650rpx;
   height:80rpx;
-  background-color:rgb(245, 245, 245);
-  border:1px solid lightgray;
 }
 .itemtag{
   margin-top: 20rpx;
@@ -28,15 +28,17 @@
   height:40rpx;
 }
 .avatar{
-  width:128rpx;
-  height:128rpx;
+  width:250rpx;
+  height:250rpx;
   margin-top:70rpx;
-  margin-left: 300rpx;
+  margin-left: 240rpx;
   border-radius:50%;
+  box-shadow:0px 0px 0px 1px rgba(255, 166, 0, 0.582);
 }
+
 .nickname{
-  color:rgb(0, 0, 0);
-  margin-left: 295rpx;
-  margin-top: 10rpx;
+  color:rgb(240, 130, 90);
+  margin-left: 283rpx;
+  margin-top: 20rpx;
   margin-bottom: 70rpx;
 }

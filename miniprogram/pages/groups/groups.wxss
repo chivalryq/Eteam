@@ -6,3 +6,23 @@
   text-overflow: ellipsis;
   word-break: break-word;
 }
+.edit-pic{
+  width: 50rpx;
+  height:50rpx;
+}
+.padding {
+  padding: 20rpx;
+  color: green;
+}
+.cu-card>.cu-item {
+  display: block;
+  background-color: #fff;
+  overflow: hidden;
+  border-radius: 35rpx;
+  margin: 30rpx;
+  color:green;
+}
+.add{
+  width:60rpx;
+  height:60rpx;
+}

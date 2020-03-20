@@ -1,7 +1,6 @@
 // pages/findPerson/findPerson.js
 const app = getApp()
 Page({
-
 	/**
 	 * 页面的初始数据
 	 */
@@ -9,6 +8,8 @@ Page({
 		pageindex:0,
     imgArrs: [],
     hideAddImg: '',
+    tabChose:'0',
+    tab: ['技术', '美工', '策划', '文案'],
     major: [
       { name: '0', value: '软件学院' },
       { name: '1', value: '信通学院' },

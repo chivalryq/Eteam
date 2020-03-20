@@ -15,25 +15,6 @@
   "window": {
     "navigationStyle": "custom"
   },
-  "tabBar": {
-    "color": "#a9b7b7",
-    "selectedColor": "#11cd6e",
-    "borderStyle": "white",
-    "list": [
-      {
-        "iconPath": "images/index.png",
-        "selectedIconPath": "images/indexselected.png",
-        "pagePath": "pages/index/index",
-        "text": "首页"
-      },
-      {
-        "iconPath": "images/person.png",
-        "selectedIconPath": "images/personselected.png",
-        "pagePath": "pages/personcenter/personcenter",
-        "text": "个人中心"
-      }
-    ]
-  },
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom"
   },
