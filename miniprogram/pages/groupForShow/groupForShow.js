@@ -25,7 +25,8 @@ Page({
     nowContest: '',
     nowPost: [],
     nowPostInString:'',
-    posts:[]
+    posts:[],
+    needOrNot:[]
 
   },
   ContestChange: function (e) {
@@ -80,14 +81,34 @@ Page({
           wx.hideLoading()
           console.log(that.data.nowPost)
           for (var i = 0; i < that.data.nowPost.length; i++) {
-            
             that.data.posts.push(that.data.post[that.data.nowPost[i]].value)
-          
           }
           console.log(that.data.posts)
           that.setData({
             nowPostInString: that.data.posts.join(",")
           })
+          var tempString = ["策划", "技术", "美工", "文案"]
+          var needOrNot = []
+          var temp = {}
+          for(var i=0;i<4;i++){
+            
+            if(that.data.nowPost.indexOf(i.toString())==-1)
+              {
+              temp = { ch: 0, value: tempString[i] }
+                needOrNot.push(temp)
+              }
+             else{
+              temp = { ch: 1, value: tempString[i] }
+              needOrNot.push(temp)
+             } 
+           
+            console.log(needOrNot)
+          }
+          that.setData({
+            needOrNot: needOrNot
+          })
+          
+          console.log(that.data.needOrNot)
         } else {
           console.log('请求失败')
         }

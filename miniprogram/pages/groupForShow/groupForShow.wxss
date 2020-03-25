@@ -10,12 +10,23 @@
 }
 .imgArr view {
   display: inline-block;
-  margin: 10rpx;
+  margin: 30rpx;
 }
 .img_item {
-    width: 122rpx;
+  width: 122rpx;
 	height: 122rpx; 
   border: 1rpx solid #e5e5e5;
   position: relative;
+}
+.content-left{
+  margin:30rpx;
+}
+.content-left1{
+  margin:30rpx;
+  text-decoration:underline;
+}
+.content-center{
+  text-align:center;
+  color:green;
 }
 

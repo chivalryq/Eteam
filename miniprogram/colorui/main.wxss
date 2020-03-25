@@ -3079,11 +3079,13 @@ scroll-view.cu-steps .cu-item {
 
 .padding-sm {
   padding: 20rpx;
+  margin:20rpx;
+  border-radius: 35rpx;
 }
 
 .padding {
   padding: 20rpx;
-  border-radius: 35rpx;
+
   margin: 10rpx;
 }
 
@@ -3093,6 +3095,8 @@ scroll-view.cu-steps .cu-item {
 
 .padding-xl {
   padding: 50rpx;
+  border-radius: 35rpx;
+  margin: 10rpx;
 }
 
 .padding-top-xs {

@@ -9,3 +9,14 @@
   margin:30rpx;
   text-decoration:underline;
 }
+.contentSmall{
+  font-size: 0.8em;
+  text-align:center;
+  position: relative;
+	padding: 0;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+  vertical-align: middle;
+  margin-bottom: 50rpx;
+}

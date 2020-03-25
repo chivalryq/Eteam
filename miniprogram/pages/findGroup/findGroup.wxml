@@ -1,6 +1,6 @@
 <!--pages/findGroup/findGroup.wxml-->
 
-<cu-custom bgColor="bg-gradual-red" isBack="{{true}}">
+<cu-custom bgColor="bg-gradual-purple" isBack="{{true}}">
 	<view slot="backText">返回</view>
 	<view slot="content">找队伍</view>
 </cu-custom>
@@ -12,8 +12,8 @@
   </view>
 </scroll-view>
 <block wx:for="{{teams}}" wx:key="" wx:for-index="idx" wx:for-item="item">
-	<view class="cu-card dynamic {{isCard?'no-card':''}} " bindtap="gogroupForShow" data-teamid="{{item.id}}">
-      <view class="padding radius shadow shadow-lg bg-gradual-purple margin-top">
+	<view class="cu-card dynamic {{isCard?'no-card':''}} "  data-teamid="{{item.id}}">
+      <view class="padding-xl radius shadow shadow-lg bg-gradual-purple margin-top">
         <view class="content-center ">
           <view>{{item.team_name}}</view>
         </view>
@@ -27,12 +27,14 @@
           岗位需求
         </view>
         <view class="flex solid-bottom padding justify-between">
-        <block wx:for="{{need[idx]}}" wx:key="" wx:for-index="idx1" wx:for-item="item1">
-          <view class="cu-avatar round lg bg-grudual-blue">
-            {{item1[idx].length}}
+        <block wx:for="{{teams[idx].need}}" wx:key="" wx:for-index="idx1" wx:for-item="item1">
+          <view class="cu-avatar round lg bg-grudual-blue margin-xs">
+            <text class="contentSmall">
+            {{post[item1].value}}
+            </text>
           </view>
         </block>
-        <view bindtap="gogroupForShow" data-teamid="{{item.id}}">查看详情 ></view>
+        <view bindtap="gogroupForShow" data-teamid="{{item.id}}" >查看详情 ></view>
         </view>
       </view>
   </view>

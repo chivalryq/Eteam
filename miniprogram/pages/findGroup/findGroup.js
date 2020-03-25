@@ -6,10 +6,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+    TabCur: 0,
+    scrollLeft: 0,
     imgArrs: [],
     hideAddImg: '',
     tab:['雏燕','大创','电商','校外'],
-    need:[],
+    need:[[0],[1]],
     major: [
       { id: '0001', value: "软件学院" }, { id: '0010', value: "信通学院" }, { id: '0011', value: "电子工程学院" }, { id: '0100', value: "计算机学院" }, { id: '0101', value: "自动化学院" }, { id: '0110', value: "经济管理学院" }, { id: '0111', value: "理学院" }, { id: '1000', value: "人文学院" }, { id: '1001', value: "媒体与设计艺术学院" }, { id: '1010', value: "现代邮政学院" }, { id: '1011', value: "网络空间安全学院" }, { id: '1100', value: "光电信息学院" }, { id: '1101', value: "国际学院" }
     ],
@@ -19,7 +21,7 @@ Page({
     contest: [
       { id: '001', value: '大创' }, { id: '010', value: '小创' }, { id: '011', value: '雏雁计划' }, { id: '100', value: 'ACM/ICPC' }, { id: '101', value: '其他比赛' }
     ],
-    teams: [{}, {}]
+    teams: []
   },
   gogroupForShow: function (e) {
     var id = e.currentTarget.dataset.teamid;
@@ -28,7 +30,13 @@ Page({
     })
   },
   tabSelect(e) {
-    
+    var that=this
+    console.log(e)
+    that.setData({
+      TabCur: e.currentTarget.dataset.id,
+      scrollLeft: (e.currentTarget.dataset.id - 1) * 60
+    })
+    that.request(e.currentTarget.dataset.id)
   },
   request: function (e) {
     var that = this
@@ -36,7 +44,8 @@ Page({
       url: 'https://www.chival.xyz/random_teams',
       data: {
         'openid': app.globalData.openid,
-        'id': that.data.id
+        'id': that.data.id,
+        'target':e
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -53,14 +62,17 @@ Page({
             temp_url[i] = "https://www.chival.xyz/pic/" + temp_url[i].img_url
           }
           }
-          that.setData({
-            teams: res.data.teams
-          })
-          for(var k=0;k<res.data.teams.length;k++){
-            
-              that.data.need.push(res.data.teams[k].need.split('-'))
-            
+          var tempNeed=[]
+          for (var k = 0; k < res.data.teams.length; k++) {
+            tempNeed.push(res.data.teams[k].need.split('-'))
           }
+          for (var m = 0; m < res.data.teams.length; m++) {
+            res.data.teams[m].need=tempNeed[m]
+          }
+          that.setData({
+            teams: res.data.teams,
+            need:tempNeed
+          })
           console.log(that.data.teams)
           console.log(that.data.need)
         } else {
@@ -82,7 +94,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.request();
+    this.request(0);
 
   },
 
