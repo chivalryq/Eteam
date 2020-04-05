@@ -25,30 +25,15 @@ Page({
       competitionIndex: e.detail.value
     })
   },
-  TechChange: function (e) {
-    console.log(e);
-    this.setData({
-      techIndex: e.detail.value
-    })
-  },
-  ArtChange: function (e) {
-    console.log(e);
-    this.setData({
-      artIndex: e.detail.value
-    })
-  },
-  SoftwareChange: function (e) {
-    console.log(e);
-    this.setData({
-      softwareIndex: e.detail.value
-    })
-  },
   textareaAInput: function (e) {
-
     this.setData({
       textareaAValue: e.detail.value
     })
-
+  },
+  techInput: function (e) {
+    this.setData({
+      techValue: e.detail.value
+    })
   },
 	/**
 	 * 页面的初始数据
@@ -88,35 +73,13 @@ Page({
       { name: '4', value: '策划' }
     ],
     post2: [
-      { name: '0', value: '无' },
-      { name: '1', value: '全能选手' },
-      { name: '2', value: '技术' },
-      { name: '3', value: '美工' },
-      { name: '4', value: '文案' },
-      { name: '5', value: '策划' }
+      { name: '0', value: '全能选手' },
+      { name: '1', value: '技术' },
+      { name: '2', value: '美工' },
+      { name: '3', value: '文案' },
+      { name: '4', value: '策划' }
     ],
-    tech: [
-      { name: '0', value: '前端' },
-      { name: '1', value: '后端/服务器' },
-      { name: '2', value: '小程序开发' },
-      { name: '3', value: '算法' },
-      { name: '4', value: 'Android/ios开发' },
-      { name: '5', value: '电子电路类' },
-    ],
-    art: [
-      { name: '0', value: 'UI设计' },
-      { name: '1', value: '插画' },
-      { name: '2', value: '三维建模' },
-      { name: '3', value: '人物原画' },
-      { name: '4', value: '场景设计' },
-    ],
-    software: [
-      { name: '0', value: 'Ps' },
-      { name: '1', value: 'Ae' },
-      { name: '2', value: 'SAI' },
-      { name: '3', value: 'Pr' },
-      { name: '4', value: 'Ai' },
-    ],
+    tech: '',
     imgArrs: [],
     initial_pic: [],
     s_initial_pic: [],
@@ -129,9 +92,7 @@ Page({
     exmajor: '',
     expost1: '',
     expost2: '',
-    extech: [],
-    exart:[] ,
-    exsoftware: [],
+    extech: '',
     excompetition:'',
     textareaAValue: '',
 	},
@@ -189,14 +150,8 @@ Page({
     if (e.detail.value.post2 != null) {
       this.data.expost2 = e.detail.value.post2
     }
-    if (e.detail.value.techList != null) {
-      this.data.extech = e.detail.value.techList
-    }
-    if (e.detail.value.artList != null) {
-      this.data.exart = e.detail.value.artList
-    }
-    if (e.detail.value.softwareList != null) {
-      this.data.exsoftware = e.detail.value.softwareList
+    if (e.detail.value.techValue != null) {
+      this.data.extech = e.detail.value.techValue
     }
     wx.request({
       url: 'https://www.chival.xyz/update_person',
@@ -211,9 +166,7 @@ Page({
           this.data.excompetition,
         'post1': this.data.expost1,
         'post2': this.data.expost2,
-        'tech': this.data.extech.join('-'),
-        'art': this.data.exart.join('-'),
-        'software': this.data.exsoftware.join('-'),
+        'tech': e.detail.value.extech,
         'now_pic': JSON.stringify(that.data.imgArrs)
       },
       header: {
@@ -375,11 +328,7 @@ Page({
               res.data.person.expect_competition,
             expost1: res.data.person.post1,
             expost2: res.data.person.post2,
-            extech:
-(res.data.person.tech).split("-"),
-            exart: 
-              (res.data.person.art).split("-"),
-            exsoftware: (res.data.person.software).split("-"),
+            extech:res.data.person.tech,
             imgArrs: temp_url,
             initial_pic: temp_url,
             initial_pic1: temp_url1,

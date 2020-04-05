@@ -5,6 +5,8 @@ Page({
 	 * 页面的初始数据
 	 */
 	data: {
+    TabCur: 0,
+    scrollLeft: 0,
 		pageindex:0,
     imgArrs: [],
     hideAddImg: '',
@@ -40,35 +42,13 @@ Page({
       { name: '4', value: '策划' }
     ],
     post2: [
-      { name: '0', value: '无' },
-      { name: '1', value: '全能选手' },
-      { name: '2', value: '技术' },
-      { name: '3', value: '美工' },
-      { name: '4', value: '文案' },
-      { name: '5', value: '策划' }
+      { name: '0', value: '全能选手' },
+      { name: '1', value: '技术' },
+      { name: '2', value: '美工' },
+      { name: '3', value: '文案' },
+      { name: '4', value: '策划' }
     ],
-    tech: [
-      { name: '0', value: '前端' },
-      { name: '1', value: '后端/服务器' },
-      { name: '2', value: '小程序开发' },
-      { name: '3', value: '算法' },
-      { name: '4', value: 'Android/ios开发' },
-      { name: '5', value: '电子电路类' },
-    ],
-    art: [
-      { name: '0', value: 'UI设计' },
-      { name: '1', value: '插画' },
-      { name: '2', value: '三维建模' },
-      { name: '3', value: '人物原画' },
-      { name: '4', value: '场景设计' },
-    ],
-    software: [
-      { name: '0', value: 'Ps' },
-      { name: '1', value: 'Ae' },
-      { name: '2', value: 'SAI' },
-      { name: '3', value: 'Pr' },
-      { name: '4', value: 'Ai' },
-    ],
+    tech:'',
     person:[{},{},{}]
 	},
 
@@ -78,7 +58,17 @@ Page({
       url: '../findPersonDetail/findPersonDetail?id=' + e.currentTarget.dataset.personid,
     })
   },
-  
+
+  tabSelect(e) {
+    var that = this
+    console.log(e)
+    that.setData({
+      TabCur: e.currentTarget.dataset.id,
+      scrollLeft: (e.currentTarget.dataset.id - 1) * 60
+    })
+    that.request(e.currentTarget.dataset.id)
+  },
+
   request: function (e) {
     var that = this;
     wx.request({
@@ -87,7 +77,8 @@ Page({
         'content-type': 'application/x-www-form-urlencoded'
       },
       data: {
-        'openid': app.globalData.openid
+        'openid': app.globalData.openid,
+        'target': e
       },
       method: "GET",
       success(res) {

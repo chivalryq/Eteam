@@ -27,24 +27,6 @@ Page({
       competitionIndex: e.detail.value
     })
   },
-  TechChange: function (e) {
-    console.log(e);
-    this.setData({
-      techIndex: e.detail.value
-    })
-  },
-  ArtChange: function (e) {
-    console.log(e);
-    this.setData({
-      artIndex: e.detail.value
-    })
-  },
-  SoftwareChange: function (e) {
-    console.log(e);
-    this.setData({
-      softwareIndex: e.detail.value
-    })
-  },
   previewImage(e) {
     console.log(e)
     let that = this
@@ -70,6 +52,13 @@ Page({
 
     this.setData({
       textareaAValue: e.detail.value
+    })
+
+  },
+  techInput: function (e) {
+
+    this.setData({
+      techValue: e.detail.value
     })
 
   },
@@ -122,35 +111,13 @@ Page({
       { name: '4', value: '策划' }
 		],
     post2: [
-      { name: '0', value: '无' },
-      { name: '1', value: '全能选手' },
-      { name: '2', value: '技术' },
-      { name: '3', value: '美工' },
-      { name: '4', value: '文案' },
-      { name: '5', value: '策划' }
+      { name: '0', value: '全能选手' },
+      { name: '1', value: '技术' },
+      { name: '2', value: '美工' },
+      { name: '3', value: '文案' },
+      { name: '4', value: '策划' }
     ],
-    tech: [
-      { name: '0', value: '前端' },
-      { name: '1', value: '后端/服务器' },
-      { name: '2', value: '小程序开发' },
-      { name: '3', value: '算法' },
-      { name: '4', value: 'Android/ios开发' },
-      { name: '5', value: '电子电路类' },
-    ],
-    art: [
-      { name: '0', value: 'UI设计' },
-      { name: '1', value: '插画' },
-      { name: '2', value: '三维建模' },
-      { name: '3', value: '人物原画' },
-      { name: '4', value: '场景设计' },
-    ],
-    software: [
-      { name: '0', value: 'Ps' },
-      { name: '1', value: 'Ae' },
-      { name: '2', value: 'SAI' },
-      { name: '3', value: 'Pr' },
-      { name: '4', value: 'Ai' },
-    ],
+    tech:'',
     imgArrs: [],
     hideAddImg: '',
     id:'',
@@ -177,17 +144,11 @@ Page({
     this.setData({
       detail: e.detail.value
     })
-    if (e.detail.value.techList!= null) {
-      this.data.addtech = e.detail.value.techList
-    }
-    if (e.detail.value.artList != null) {
-      this.data.addart = e.detail.value.artList
-    }
-    if (e.detail.value.softwareList != null) {
-      this.data.addsoftware = e.detail.value.softwareList
-    }
     if (e.detail.value.resume != null) {
       this.data.resume = e.detail.value.resume
+    }
+    if (e.detail.value.tech != null) {
+      this.data.tech = e.detail.value.tech
     }
     wx.request({
       url: 'https://www.chival.xyz/create_person',
@@ -201,9 +162,7 @@ Page({
           e.detail.value.competition,
         'post1': e.detail.value.post1,
         'post2': e.detail.value.post2,
-        'tech': (this.data.addtech).join('-'),
-        'art': (this.data.addart).join('-'),
-        'software': (this.data.addsoftware).join('-'),
+        'tech': this.data.tech,
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded' 
@@ -242,13 +201,7 @@ Page({
         }
     })
   },
-	textareaAInput:function(e){
-
-			this.setData({
-				textareaAValue: e.detail.value
-			})
-		
-	},
+  
   request: function (e) {
     var that = this;
     wx.request({

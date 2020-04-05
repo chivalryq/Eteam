@@ -43,83 +43,14 @@
     </picker>
   </view>
 
-<block class='margin-top' wx:if='{{(post1Index!=null && post1Index<=1)||(post2Index!=null &&  (post2Index==1||post2Index==2))||(post1Index==null && expost1<=1)||(post2Index==null && (expost2==1||expost2==2))}}'>
-<view class='margin'>
-	<view class="action">
-      <text class="icon-title text-orange "></text>比较擅长什么？
-    </view>
-    <wxs module="filter">
-    var isChecked = function(name,data){
-      return data.indexOf(name) !=-1 ? true:false;
-    }
-    module.exports = {
-      isChecked: isChecked
-    }
-  </wxs>
-    <view class="margin-top">
-    
-<checkbox-group bindchange="TechChange" name='techList'>
-  <block wx:for="{{tech}}" wx:key>
-    <view class="cu-form-group">
-      <view class="title">{{item.value}}</view>
-	    <checkbox class="round" value='{{item.name}}' checked='{{filter.isChecked(item.name,extech)}}'></checkbox>
-  </view>
-  </block>
-		</checkbox-group>
-  </view>
-	 
-  </view>
-</block>
-<block class='margin-top' wx:if='{{(post1Index!=null && (post1Index==2||post1Index==0))||(post2Index!=null &&  (post2Index==3||post2Index==1))||(post1Index==null && (expost1==2||expost1==0))||(post2Index==null && (expost2==3||expost2==1))}}'>
-<view class='margin'>
-	<view class="action">
-      <text class="icon-title text-orange "></text>比较擅长什么？
-    </view>
-    <wxs module="filter">
-    var isChecked = function(name,data){
-      return data.indexOf(name) !=-1 ? true:false;
-    }
-    module.exports = {
-      isChecked: isChecked
-    }
-  </wxs>
-    <view class="margin-top">
-	<checkbox-group bindchange="ArtChange" name='artList'>
-<block wx:for="{{art}}" wx:key>
-<view class="cu-form-group">
-  <view class="title">{{item.value}}</view>
-    <checkbox class="round" value='{{item.name}}' checked='{{filter.isChecked(item.name,exart)}}'></checkbox>
-  </view>
-  </block>
-		</checkbox-group>
-  </view>
-	 
-  </view>
-</block>
-<block class='margin-top' wx:if='{{(post1Index!=null && (post1Index==2||post1Index==0))||(post2Index!=null &&  (post2Index==3||post2Index==1))||(post1Index==null && (expost1==2||expost1==0))||(post2Index==null && (expost2==3||expost2==1))}}'>
-<view class='margin'>
-	<view class="action">
-      <text class="icon-title text-orange "></text>能用哪些软件？
-    </view>
-    <wxs module="filter">
-    var isChecked = function(name,data){
-      return data.indexOf(name) !=-1 ? true:false;
-    }
-    module.exports = {
-      isChecked: isChecked
-    }
-  </wxs>
-    <view class="margin-top">
-	<checkbox-group bindchange="SoftwareChange" name='softwareList'>
-<block wx:for="{{software}}" wx:key>
-<view class="cu-form-group">
-  <view class="title">{{item.value}}</view>
-    <checkbox class="round" value='{{item.name}}' checked='{{filter.isChecked(item.name,exsoftware)}}'></checkbox>
-  </view>
-  </block>
-</checkbox-group>
-</view>
-  </view>
+<view class="cu-form-group margin-top">
+  <view class="title">擅长技能</view>
+  <textarea name='extech' value='{{extech}}' maxlength="256"  placeholder-class="placeholder" class="{{techValue==null?'value':''}}" bindinput="techInput"></textarea>
+</view> 
+
+
+<block class='margin-top' wx:if='{{(post1Index!=null && (post1Index==2||post1Index==0))||(post2Index!=null &&  (post2Index==2||post2Index==0))||(post1Index==null && (expost1==2||expost1==0))||(post2Index==null && (expost2==2||expost2==0))}}'>
+
   	<view class="action margin-tb"><text class="icon-title text-green "></text>作品展示</view>
   <view class="cu-form-group margin-top">
  <view class='imgArr'>

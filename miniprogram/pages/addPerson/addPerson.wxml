@@ -51,59 +51,13 @@
     </picker>
   </view>
 
-<block class='margin-top' wx:if='{{post1Index<=1||post2Index==1||post2Index==2}}'>
-<view class='margin'>
-	<view class="action">
-      <text class="icon-title text-orange "></text>比较擅长什么？
-    </view>
-    <view class="margin-top">
-    
-<checkbox-group bindchange="TechChange" name='techList'>
-  <block wx:for="{{tech}}" wx:key='name'>
-    <view class="cu-form-group">
-      <view class="title">{{item.value}}</view>
-	    <checkbox class="round" value='{{item.name}}' checked="{{item.checked}}"></checkbox>
-  </view>
-  </block>
-		</checkbox-group>
-  </view>
-	 
-  </view>
-</block>
-<block class='margin-top' wx:if='{{post1Index==2||post1Index==0||post2Index==3||post2Index==1}}'>
-<view class='margin'>
-	<view class="action">
-      <text class="icon-title text-orange "></text>比较擅长什么？
-    </view>
-    <view class="margin-top">
-	<checkbox-group bindchange="ArtChange" name='artList'>
-<block wx:for="{{art}}" wx:key='name'>
-<view class="cu-form-group">
-  <view class="title">{{item.value}}</view>
-    <checkbox class="round" value='{{item.name}}' checked="{{item.checked}}"></checkbox>
-  </view>
-  </block>
-		</checkbox-group>
-  </view>
-	 
-  </view>
-</block>
-<block class='margin-top' wx:if='{{post1Index==2||post1Index==0||post2Index==3||post2Index==1}}'>
-<view class='margin'>
-	<view class="action">
-      <text class="icon-title text-orange "></text>能用哪些软件？
-    </view>
-    <view class="margin-top">
-	<checkbox-group bindchange="SoftwareChange" name='softwareList'>
-<block wx:for="{{software}}" wx:key='name'>
-<view class="cu-form-group">
-  <view class="title">{{item.value}}</view>
-    <checkbox class="round" value='{{item.name}}' checked="{{item.checked}}"></checkbox>
-  </view>
-  </block>
-		</checkbox-group>
-  </view>
-  </view>
+<view class="cu-form-group margin-top">
+  <view class="title">擅长技能</view>
+    <textarea name='tech' data-placeholder="可以写一下自己擅长使用的软件等" maxlength="256"  placeholder-class="placeholder" class="{{techValue?'value':''}}" bindinput="techInput"></textarea>
+</view> 
+
+
+<block class='margin-top' wx:if='{{post1Index==2||post1Index==0||post2Index==2||post2Index==0}}'>
 
   	<view class="action margin-tb"><text class="icon-title text-green "></text>作品展示</view>
    <view class="cu-form-group margin-top">
