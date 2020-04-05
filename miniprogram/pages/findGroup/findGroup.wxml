@@ -4,15 +4,19 @@
 	<view slot="backText">返回</view>
 	<view slot="content">找队伍</view>
 </cu-custom>
-<scroll-view scroll-x class="bg-white nav">
-  <view class="flex text-center">
-    <view class="cu-item flex-sub {{index==TabCur?'text-purple cur':''}}" wx:for="{{4}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+
+<scroll-view scroll-x class="fixed bg-white nav" style="top:70px;">
+  <view class="flex  text-center" >
+    <view class="cu-item flex-sub {{index==TabCur?'text-chose':'text-nun'}}" wx:for="{{4}}" wx:key bindtap="tabSelect" data-id="{{index}}">
       {{tab[index]}}
     </view>
   </view>
 </scroll-view>
+<view class="cu-card margin-top" style="height:20px;">
+
+</view>
 <block wx:for="{{teams}}" wx:key="" wx:for-index="idx" wx:for-item="item">
-	<view class="cu-card dynamic {{isCard?'no-card':''}} "  data-teamid="{{item.id}}">
+	<view class="cu-card dynamic margin-top {{isCard?'no-card':''}} "   data-teamid="{{item.id}}">
       <view class="padding-xl radius shadow shadow-lg bg-gradual-purple margin-top">
         <view class="content-center ">
           <view>{{item.team_name}}</view>
@@ -26,9 +30,9 @@
         <view class="content-left">
           岗位需求
         </view>
-        <view class="flex solid-bottom padding justify-between">
+        <view class="flex solid-bottom padding justify-between align-center">
         <block wx:for="{{teams[idx].need}}" wx:key="" wx:for-index="idx1" wx:for-item="item1">
-          <view class="cu-avatar round lg bg-grudual-blue margin-xs">
+          <view class="cu-avatar round lg bg-purple margin-xs">
             <text class="contentSmall">
             {{post[item1].value}}
             </text>

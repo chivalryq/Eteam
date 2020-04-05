@@ -43,6 +43,11 @@ Page({
 }
 return newArr;
 },
+goindex:function(){
+  wx.navigateBack({
+    delta:1
+  })
+},
   subset: function(arr1, arr2) {
     var len = arr1.length;
     var arr = [];
@@ -116,6 +121,7 @@ return newArr;
         }
       }
     })
+    that.goindex()
   },
   previewImage(e) {
     console.log(e)

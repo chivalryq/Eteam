@@ -4,74 +4,74 @@
 	<view slot="content">我的队伍</view>
 </cu-custom>
 <form bindsubmit='submit'>
-  <view class="cu-form-group margin-top">
-    <view class="title">姓名</view>
-    <input class="input" name='name' maxlength="80" ></input>
-  </view>
 	<view class="cu-form-group margin-top">
-    <view class="title" >专业</view>
-    <picker bindchange="MajorChange" value="{{majorIndex}}" range="{{major}}" range-key="value" name='major'>
-      <view class="picker">
-        {{majorIndex?major[majorIndex].value:major[nowMajor].value}}
-      </view>
-    </picker>
-  </view>
-  
-	<view class="action margin-tb"><text class="icon-title text-green "></text>项目信息</view>
- <view class="cu-form-group margin-top">
-    <view class="title">项目名称</view>
-    <input placeholder="Eteam" name='projectName'></input>
-  </view>
-  <view class="cu-form-group">
-    <view class="title">目标比赛</view>
-    <picker bindchange="ContestChange" value="{{contestIndex}}" range="{{contest}}" range-key="value" name='target'>
-      <view class="picker">
-        {{contestIndex?contest[contestIndex].value:contest[nowContext].value}}
-      </view>
-    </picker>
-  </view>
-  <view class="cu-form-group">
-  <view class="title">项目简述</view>
-    <textarea name='introduce' data-placeholder="简单描述一下项目的概况，人员组成等，让其他人更了解项目情况，也可以留下QQ之类的联系方式方便其他人进一步交流" maxlength="2048"  placeholder-class="placeholder" class="{{textareaAValue?'value':''}}" bindinput="textareaAInput"></textarea>
-  </view> 
-  <view class="cu-form-group">
-  <view class="title">项目进度</view>
-    <textarea name='progress' data-placeholder="简要介绍一下项目目前的进度" maxlength="512"  placeholder-class="placeholder" class="{{textareaAValue?'value':''}}" bindinput="textareaAInput"></textarea>
-  </view> 
-  	<view class="action margin-tb"><text class="icon-title text-green "></text>图片上传</view>
-   <view class="cu-form-group margin-top">
-<view class="weui-uploader">
- <view class="weui-uploader__bd">
-   <block wx:for="{{imagesList}}" wx:key="*this" >
-      <view class="weui-uploader__file">
-         <image class="weui-uploader__img" src="{{item}}"></image>
-      </view>
-   </block>
-  <view class="weui-uploader__input-box">
-     <input class="weui-uploader__input js_file" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple=""      bindtap='uploader' name="images"></input>
-  </view>
- </view>
-</view>
-</view>
-<view class="action margin-tb"><text class="icon-title text-green "></text>需求岗位</view>
-<wxs module="filter">
-    var isChecked = function(id,data){
-      return data.indexOf(id) !=-1 ? true:false;
-    }
-    module.exports = {
-      isChecked: isChecked
-    }
-  </wxs>
-	<checkbox-group name='needPost'>
-<block wx:for="{{post}}" wx:key="id">
-<view class="cu-form-group">
-  <view class="title">{{item.value}}</view>
-    <checkbox class="round" value="{{item.id}}" checked='{{filter.isChecked(item.id,nowPost)}}'></checkbox>
-  </view>
-  </block>
-		</checkbox-group>
+		<view class="title">姓名</view>
+		<input class="input" name='name' maxlength="80"></input>
+	</view>
+	<view class="cu-form-group margin-top">
+		<view class="title">专业</view>
+		<picker bindchange="MajorChange" value="{{majorIndex}}" range="{{major}}" range-key="value" name='major'>
+			<view class="picker">
+				{{majorIndex?major[majorIndex].value:major[nowMajor].value}}
+			</view>
+		</picker>
+	</view>
 
-<view class="padding flex flex-direction">
-<button class='cu-btn bg-orange margin-tb-sm lg' form-type='submit'>提交</button>
-</view>
+	<view class="action margin-tb"><text class="icon-title text-green "></text>项目信息</view>
+	<view class="cu-form-group margin-top">
+		<view class="title">项目名称</view>
+		<input placeholder="Eteam" name='projectName'></input>
+	</view>
+	<view class="cu-form-group">
+		<view class="title">目标比赛</view>
+		<picker bindchange="ContestChange" value="{{contestIndex}}" range="{{contest}}" range-key="value" name='target'>
+			<view class="picker">
+				{{contestIndex?contest[contestIndex].value:contest[nowContext].value}}
+			</view>
+		</picker>
+	</view>
+	<view class="cu-form-group">
+		<view class="title">项目简述</view>
+		<textarea name='introduce' data-placeholder="简单描述一下项目的概况，人员组成等，让其他人更了解项目情况，也可以留下QQ之类的联系方式方便其他人进一步交流" maxlength="2048" placeholder-class="placeholder" class="{{textareaAValue?'value':''}}" bindinput="textareaAInput"></textarea>
+	</view>
+	<view class="cu-form-group">
+		<view class="title">项目进度</view>
+		<textarea name='progress' data-placeholder="简要介绍一下项目目前的进度" maxlength="512" placeholder-class="placeholder" class="{{textareaAValue?'value':''}}" bindinput="textareaAInput"></textarea>
+	</view>
+	<view class="action margin-tb"><text class="icon-title text-green "></text>图片上传</view>
+	<view class="cu-form-group margin-top">
+		<view class="weui-uploader">
+			<view class="weui-uploader__bd">
+				<block wx:for="{{imagesList}}" wx:key="*this">
+					<view class="weui-uploader__file">
+						<image class="weui-uploader__img" src="{{item}}"></image>
+					</view>
+				</block>
+				<view class="weui-uploader__input-box">
+					<input class="weui-uploader__input js_file" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" multiple="" bindtap='uploader' name="images"></input>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="action margin-tb"><text class="icon-title text-green "></text>需求岗位</view>
+	<wxs module="filter">
+		var isChecked = function(id, data) {
+			return data.indexOf(id) != -1 ? true : false;
+		}
+		module.exports = {
+			isChecked: isChecked
+		}
+	</wxs>
+	<checkbox-group name='needPost'>
+		<block wx:for="{{post}}" wx:key="id">
+			<view class="cu-form-group">
+				<view class="title">{{item.value}}</view>
+				<checkbox class="round" value="{{item.id}}" checked='{{filter.isChecked(item.id,nowPost)}}'></checkbox>
+			</view>
+		</block>
+	</checkbox-group>
+
+	<view class="padding flex flex-direction">
+		<button class='cu-btn bg-orange margin-tb-sm lg' form-type='submit'>提交</button>
+	</view>
 </form>

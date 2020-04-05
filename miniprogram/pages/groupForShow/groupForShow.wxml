@@ -5,42 +5,42 @@
 	<view slot="content">队伍信息</view>
 </cu-custom>
 <form bindsubmit='submit'>
-  <view class="content-center">项目信息</view>
-    <view class="padding radius shadow-warp bg-white margin-top">
-      <view class="content-left">项目名称</view>
-      <view class="padding solids-bottom margin-top">{{projectName}}</view>
-      <view class="flex solid-bottom padding justify-between">
-        <view class="">目标比赛</view>
-        <view class="">
-          {{contest[nowContest].value}}
-        </view>
-      </view>
-        <view class="content-left">项目简述</view>
-        <view class="padding solids-bottom margin-top">{{introduce}}</view>
-        <view class="content-left">项目进度</view>
-        <view class="padding solids-bottom margin-top">{{progress}}</view>
-         <view class='imgArr'>
-          <view wx:for="{{imgArrs}}" wx:key='' class='img_item'>
-              <image src='{{item}}' mode='widthFix' bindtap='previewImage' data-item="{{item}}"  />
-          </view>
-         </view>
-    </view>
-  <view class="content-center">岗位需求</view>
-    <view class="grid col-5 ">
-    <block wx:for="{{needOrNot}}" wx:key="" wx:for-index="idx">
-      <view class="padding-sm solid line-{{(item.ch==1)?'green':'grey'}} text-center">{{item.value}}</view>
-    </block>
-    </view>
-    <view class="padding-sm radius shadow-warp bg-white margin-top">
-      <view class="flex solid-bottom padding justify-between">
-        <view class="">队长姓名</view>
-        <view class="">{{name}}</view>
-      </view>
-    </view>
-    <view class="padding-sm radius shadow-warp bg-white margin-top">
-      <view class="flex solid-bottom padding justify-between">
-        <view class="">队长专业</view>
-        <view class="">{{major[nowMajor].value}}</view>
-      </view>
-    </view>
+	<view class="content-center">项目信息</view>
+	<view class="padding radius shadow-warp bg-white margin-top">
+		<view class="content-left">项目名称</view>
+		<view class="padding solids-bottom margin-top">{{projectName}}</view>
+		<view class="flex solid-bottom padding justify-between">
+			<view class="">目标比赛</view>
+			<view class="">
+				{{contest[nowContest].value}}
+			</view>
+		</view>
+		<view class="content-left">项目简述</view>
+		<view class="padding solids-bottom margin-top">{{introduce}}</view>
+		<view class="content-left">项目进度</view>
+		<view class="padding solids-bottom margin-top">{{progress}}</view>
+		<view class='imgArr'>
+			<view wx:for="{{imgArrs}}" wx:key='' class='img_item'>
+				<image src='{{item}}' mode='widthFix' bindtap='previewImage' data-item="{{item}}" />
+			</view>
+		</view>
+	</view>
+	<view class="content-center">岗位需求</view>
+	<view class="grid col-5 ">
+		<block wx:for="{{needOrNot}}" wx:key="" wx:for-index="idx">
+			<view class="padding-sm solid line-{{(item.ch==1)?'green':'grey'}} text-center">{{item.value}}</view>
+		</block>
+	</view>
+	<view class="padding-sm radius shadow-warp bg-white margin-top">
+		<view class="flex solid-bottom padding justify-between">
+			<view class="">队长姓名</view>
+			<view class="">{{name}}</view>
+		</view>
+	</view>
+	<view class="padding-sm radius shadow-warp bg-white margin-top">
+		<view class="flex solid-bottom padding justify-between">
+			<view class="">队长专业</view>
+			<view class="">{{major[nowMajor].value}}</view>
+		</view>
+	</view>
 </form>
