@@ -2147,13 +2147,13 @@ button.icon.lg {
 }
 
 .cu-card.case .image .cu-tag {
-  position: absolute;
+  position: relative;
   right: 0;
   top: 0;
 }
 
 .cu-card.case .image .cu-bar {
-  position: absolute;
+  position: relative;
   bottom: 0;
   width: 100%;
   background-color: transparent;
