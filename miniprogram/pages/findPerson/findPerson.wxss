@@ -6,12 +6,12 @@
   margin-top:1ch;
 }
 .text-nun{
-  color:darksalmon;
+  color:black;
 }
 .text-chose{
   color:red;
   font-weight:650;
-  font-size:x-large;
+  font-size:large;
 }
 
 .cu-card>.cu-item-red {
