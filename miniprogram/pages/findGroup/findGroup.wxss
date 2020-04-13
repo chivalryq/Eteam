@@ -21,10 +21,10 @@
   margin-bottom: 50rpx;
 }
 .text-nun{
-  color:rgb(138, 77, 138);
+  color:black;
 }
 .text-chose{
   color:rgb(134, 24, 134);
   font-weight:650;
-  font-size:x-large;
+  font-size:large;
 }

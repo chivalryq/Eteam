@@ -1,51 +1,46 @@
 <!--pages/personDetail/personDetail.wxml-->
-<cu-custom class="topback" bgColor="bg-gradual-green" isBack="{{true}}">
+<cu-custom class="topback" bgColor="bg-gradual-orange" isBack="{{true}}">
 	<view slot="backText">返回</view>
 	<view slot="content">个人信息</view>
 </cu-custom>
 
 <form bindsubmit='submit'>
-  <view class="cu-form-group margin-top">
-    <view class="title">姓名</view>
-    <view class="text-content">{{name}}</view>
-  </view>
-	<view class="cu-form-group margin-top">
-    <view class="title" >专业</view>
-    <view class="text-content">{{major[exmajor].value}}</view>
-  </view>
+	<view class="padding radius shadow-warp bg-white margin-top">
+		<view class="content-left">姓名
+		<view class="padding solids-bottom margin-top">{{name}}</view>
+    </view>
+    <view class="content-left">专业
+		<view class="padding solids-bottom margin-top">{{major[exmajor].value}}</view>
+    </view>
+			<view class="content-left">期待比赛
+			<view class="padding solids-bottom margin-top">
+				{{competition[excompetition].value}}
+			</view>
+		</view>
 
-	<view class="cu-form-group margin-top">
-    <view class="title" >期待的比赛</view>
-    <view class="text-content">{{competition[excompetition].value}}</view>
-  </view>
+		<view class='imgArr'>
+			<view wx:for="{{imgArrs}}" wx:key='' class='img_item'>
+				<image src='{{item}}' mode='widthFix' bindtap='previewImage' data-item="{{item}}" />
+			</view>
+		</view>
+	</view>
 
-	<view class="cu-form-group margin-top">第一志愿岗位
+
+	<view class="padding-sm radius shadow-warp bg-white margin-top">
+				<view class="content-left flex solid-bottom padding  justify-between">第一志愿岗位
   <view class="text-content">{{post1[expost1].value}}</view>
   </view>
-
-  <view class="cu-form-group margin-top">第二志愿岗位
+    <view class="content-left flex solid-bottom padding  justify-between">第二志愿岗位
     <view class="text-content">{{post2[expost2].value}}</view>
   </view>
-
-  <view class="cu-form-group margin-top">擅长的技能
-    <view class="text-content">{{postString==''?'无':postString}}</view>
-  </view>
-
-  	<view class="action margin-tb" wx:if='{{expost1==2 || expost2==3}}'><text class="icon-title text-green "></text>图片
-   <view class="cu-form-group margin-top">
- <view class='imgArr'>
-          <view wx:for="{{imgArrs}}" wx:key='' class='img_item'>
-              <image src='{{item}}' mode='widthFix' bindtap='previewImage' data-item="{{item}}"  />
-             
-          </view>
-          
-      </view>
-  </view>
-</view>
-<view class="cu-form-group margin-top">
-  <view class="title">自我介绍</view>
-    <view class="text-content">{{exresume=='undefined'?'无':exresume}}</view>
-</view> 
-
-
+	</view>
+	<view class="padding-sm radius shadow-warp bg-white margin-top">
+		<view class="flex solid-bottom padding justify-between">
+    		<view class="content-left">擅长技能</view>
+		<view class="padding solids-bottom margin-top">{{postString==''?'无':postString}}</view></view>
+    <view class="flex solid-bottom padding justify-between">
+		<view class="content-left">自我介绍</view>
+		<view class="padding solids-bottom margin-top">{{exresume=='undefined'?'无':exresume}}</view>
+		</view>
+	</view>
 </form>

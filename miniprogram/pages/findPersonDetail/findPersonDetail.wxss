@@ -19,3 +19,14 @@
   position: relative;
 }
 
+.content-left{
+  margin:30rpx;
+}
+.content-left1{
+  margin:30rpx;
+  text-decoration:underline;
+}
+.content-center{
+  text-align:center;
+  color:green;
+}

@@ -7,7 +7,7 @@
 
 <scroll-view scroll-x class="bg-white nav">
   <view class="flex text-center">
-    <view class="cu-item flex-sub {{index==TabCur?'text-red cur':''}}" wx:for="{{4}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+    <view class="cu-item flex-sub {{index==TabCur?'text-chose':'text-nun'}}" wx:for="{{4}}" wx:key bindtap="tabSelect" data-id="{{index}}">
       {{tab[index]}}
     </view>
   </view>
@@ -33,7 +33,8 @@
     <view class="detail shadow shadow-lg">
     <view class="text-content">
     <view>
-      意向：{{post1[item.post1].value}}、{{post2[item.post2].value}}
+      意向：{{post1[item.post1].value}}
+    <view wx:if='{{item.post2!=undefined}}'>  、{{post2[item.post2].value}}</view>
     </view>
     <view>
       自我介绍：{{item.resume=='undefined'?'无':item.resume}}</view>
