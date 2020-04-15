@@ -44,6 +44,13 @@ Page({
 return newArr;
 },
 goindex:function(){
+  var pages = getCurrentPages();//获取页面栈
+  if (pages.length > 1) {
+  //上一个页面实例对象
+  var prePage = pages[pages.length - 2];
+  //调用上一个页面的onShow方法
+  prePage.onLoad()
+  } 
   wx.navigateBack({
     delta:1
   })
@@ -122,6 +129,7 @@ goindex:function(){
       }
     })
     that.goindex()
+
   },
   previewImage(e) {
     console.log(e)
@@ -252,7 +260,6 @@ goindex:function(){
           for (var i = 0; i < temp_url.length; i++) {
             temp_url[i]="https://www.chival.xyz/pic/"+temp_url[i].img_url
           }
-          console.log(temp_url)
           var temp_url1 = res.data.team.img_url
           that.setData({
             name:res.data.team.manager_name,
@@ -266,8 +273,6 @@ goindex:function(){
             initial_pic:temp_url,
             initial_pic1:temp_url1,
           })
-        console.log(that.data.img_url)
-
         } else {
           console.log('请求失败')
         }

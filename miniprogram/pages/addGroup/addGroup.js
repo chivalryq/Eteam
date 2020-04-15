@@ -210,6 +210,13 @@ Page({
           }
         }
       })
+      var pages = getCurrentPages();//获取页面栈
+      if (pages.length > 1) {
+      //上一个页面实例对象
+      var prePage = pages[pages.length - 2];
+      //调用上一个页面的onShow方法
+      prePage.onLoad()
+      } 
     }
   },
   // 图片预览

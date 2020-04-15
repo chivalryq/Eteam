@@ -29,6 +29,42 @@ Page({
       url: '../groupDetail/groupDetail?id='+ id,
     })
   },
+  deletegroup:function(e){
+    var that=this
+    var id=e.currentTarget.dataset.teamid;
+    wx.showModal({
+      title:'提示',
+      content:'确定要删除该队伍吗？',
+      success(res){
+        if(res.confirm){
+          console.log("用户点击确定")
+          wx.request({
+            url: 'https://www.chival.xyz/delete_team',
+            data:{
+              'openid':app.globalData.openid,
+              'id':id
+            },
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            method: 'POST',
+            success(res){
+              if(res.statusCode==200){
+                console.log(res)
+                that.onLoad()
+              }
+              else{
+                console.log("请求失败")
+              }
+            }
+          })
+        }
+        else if(res.cancel){
+          console.log("用户点击取消")
+        }
+      }
+    })
+  },
 
   request: function (e) {
     var that = this
@@ -67,7 +103,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-      this.request();
+    var that=this
+      that.request();
 
   },
 

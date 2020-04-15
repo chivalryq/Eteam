@@ -4,25 +4,29 @@
 	<view slot="content">发布队伍</view>
 </cu-custom>
 <view class="padding solid-bottom margin-top">
-<view class="flex solid-bottom padding justify-between align-center">
-  <view>我的队伍</view>
-  <image src='/images/添加.png' class="add" bindtap="goaddGroup"></image>
-  </view>
+	<view class="flex solid-bottom padding justify-between align-center">
+		<view>我的队伍</view>
+		<image src='/images/添加.png' class="add" bindtap="goaddGroup"></image>
+	</view>
 </view>
 <block wx:for="{{teams}}" wx:key="" wx:for-index="idx">
-	<view class="cu-card case {{isCard?'no-card':''}} "  >
-  <view class="cu-item  radius bg-white shadow-warp margin-tb-xs">
-    <view class="cu-list menu-avatar">
-      <view class="cu-item">
-        <view class="content flex-sub">
-          <view>{{item.team_name}}</view>
-        </view>
-          <view class="flex padding align-center" bindtap="gogroupDetail" data-teamid="{{item.id}}">
-        <image class="edit-pic" src="/images/编辑.png" mode="widthFix" ></image>
-          <view>编辑</view>
-        </view>
-      </view>
-    </view>
-  </view>
-</view>
+	<view class="cu-card case {{isCard?'no-card':''}} ">
+		<view class="cu-item  radius bg-white shadow-warp margin-tb-xs">
+			<view class="cu-list menu-avatar">
+				<view class="cu-item">
+					<view class="content flex-sub">
+						<view>{{item.team_name}}</view>
+					</view>
+					<view class="flex padding align-center" bindtap="gogroupDetail" data-teamid="{{item.id}}">
+						<image class="edit-pic" src="/images/编辑.png" mode="widthFix"></image>
+						<view>编辑</view>
+					</view>
+					<view class="flex padding align-center" bindtap="deletegroup" data-teamid="{{item.id}}">
+						<image class="edit-pic" src="/images/delete.png" mode="widthFix"></image>
+						<view>删除</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
 </block>
