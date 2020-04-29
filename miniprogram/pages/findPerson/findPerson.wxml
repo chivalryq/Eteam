@@ -33,8 +33,7 @@
     <view class="detail shadow shadow-lg">
     <view class="text-content">
     <view>
-      意向：{{post1[item.post1].value}}
-    <view wx:if='{{item.post2!=undefined}}'>  、{{post2[item.post2].value}}</view>
+      意向：{{post1[item.post1].value}}、{{post2[item.post2].value}}
     </view>
     <view>
       自我介绍：{{item.resume=='undefined'?'无':item.resume}}</view>

@@ -48,6 +48,18 @@ Page({
       postIndex: e.detail.value
     })
   },
+  goindex:function(){
+    var pages = getCurrentPages();//获取页面栈
+    if (pages.length > 1) {
+    //上一个页面实例对象
+    var prePage = pages[pages.length - 2];
+    //调用上一个页面的onShow方法
+    prePage.onLoad()
+    } 
+    wx.navigateBack({
+      delta:1
+    })
+  },
   request: function (e) {
     var that = this
     wx.request({
@@ -111,6 +123,12 @@ Page({
           console.log(that.data.needOrNot)
         } else {
           console.log('请求失败')
+          wx.showToast({
+            title: '网络异常',
+            icon:'none',
+            duration:'1000'
+          })
+          that.goindex()
         }
       }
     })

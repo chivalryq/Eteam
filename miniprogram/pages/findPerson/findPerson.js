@@ -78,19 +78,19 @@ Page({
       },
       data: {
         'openid': app.globalData.openid,
-        'target': e
+        'post': e
       },
       method: "GET",
       success(res) {
         if (res.statusCode == 200) {
           console.log("请求成功")
           console.log(res)
-          for (var j = 0; j < res.data.people.length; j++) {
-            var temp_url = res.data.people[j].img_url
-            for (var i = 0; i < temp_url.length; i++) {
-              temp_url[i] = "https://www.chival.xyz/pic/" + temp_url[i].img_url
-            }
-          }
+//          for (var j = 0; j < res.data.person.length; j++) {
+//            var temp_url = res.data.person[j].img_url
+//           for (var i = 0; i < temp_url.length; i++) {
+//              temp_url[i] = "https://www.chival.xyz/pic/" + temp_url[i].img_url
+//            }
+//          }
           that.setData({
             person: res.data.people
           })

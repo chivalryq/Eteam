@@ -123,12 +123,13 @@ goindex:function(){
           console.log("上传成功")
           console.log(res)
           wx.hideLoading()
+          that.goindex()
         } else {
           console.log('上传失败')
         }
       }
     })
-    that.goindex()
+
 
   },
   previewImage(e) {

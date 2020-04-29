@@ -118,9 +118,7 @@ Page({
     exmajor: '',
     expost1: '',
     expost2: '',
-    extech: [],
-    exart: [],
-    exsoftware: [],
+    extech: '',
     excompetition: '',
     textareaAValue: '',
     post:[],
@@ -155,11 +153,7 @@ Page({
               res.data.person.expect_competition,
             expost1: res.data.person.post1,
             expost2: res.data.person.post2,
-            extech:
-              (res.data.person.tech).split("-"),
-            exart:
-              (res.data.person.art).split("-"),
-            exsoftware: (res.data.person.software).split("-"),
+            extech: res.data.person.tech,
             imgArrs: temp_url,
           })
           console.log(that.data)
