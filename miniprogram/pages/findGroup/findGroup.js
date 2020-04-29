@@ -29,6 +29,18 @@ Page({
       url: '../groupForShow/groupForShow?id=' + id,
     })
   },
+  goindex:function(){
+    var pages = getCurrentPages();//获取页面栈
+    if (pages.length > 1) {
+    //上一个页面实例对象
+    var prePage = pages[pages.length - 2];
+    //调用上一个页面的onShow方法
+    prePage.onLoad()
+    } 
+    wx.navigateBack({
+      delta:1
+    })
+  },
   tabSelect(e) {
     var that=this
     console.log(e)
@@ -74,8 +86,15 @@ Page({
           })
           console.log(that.data.teams)
           console.log(that.data.need)
+          wx.hideLoading()
         } else {
           console.log('请求失败')
+          wx.showToast({
+            title: '网络异常',
+            icon:'none',
+            duration:'1000'
+          })
+          that.goindex()
         }
       }
     })
@@ -93,6 +112,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '请稍后',
+    })
     this.request(0);
 
   },

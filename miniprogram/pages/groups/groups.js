@@ -29,6 +29,18 @@ Page({
       url: '../groupDetail/groupDetail?id='+ id,
     })
   },
+  goindex:function(){
+    var pages = getCurrentPages();//获取页面栈
+    if (pages.length > 1) {
+    //上一个页面实例对象
+    var prePage = pages[pages.length - 2];
+    //调用上一个页面的onShow方法
+    prePage.onLoad()
+    } 
+    wx.navigateBack({
+      delta:1
+    })
+  },
   deletegroup:function(e){
     var that=this
     var id=e.currentTarget.dataset.teamid;
@@ -93,8 +105,15 @@ Page({
             teams:res.data.teams
           })
           console.log(that.data.teams)
+          wx.hideLoading()
         } else {
           console.log('请求失败')
+          wx.showToast({
+            title: '网络异常',
+            icon:'none',
+            duration:'1000'
+          })
+          that.goindex()
         }
       }
     })
@@ -104,6 +123,9 @@ Page({
    */
   onLoad: function (options) {
     var that=this
+    wx.showLoading({
+      title: '请稍后',
+    })
       that.request();
 
   },
